@@ -1,2 +1,2 @@
 #!/bin/bash
-exit 127
+rm -rf Welolo/node_modules/
