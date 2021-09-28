@@ -3,6 +3,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import "./SuccessfulPayment.js";
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -13,6 +14,8 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
+
+  
 
   //TODO: Return our own basic webpages
   return (
