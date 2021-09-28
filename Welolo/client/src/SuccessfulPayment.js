@@ -12,7 +12,7 @@ function SuccessfulPayment() {
       .then((data) => setData(data.message));
   }, []);
 
-  if(data.json.message == "success"){
+  if(data === "success"){
       return (
         <div className="successfulPayment">
             <h1>
@@ -23,10 +23,10 @@ function SuccessfulPayment() {
   } else {
       return (
         <div className="unsuccessfulPayment">
-        <h1>
-            Some logic is wrong here. 
-        </h1>
-    </div>
+            <h1>
+                Some logic is wrong here. 
+            </h1>
+        </div>
       )
   }
 }
