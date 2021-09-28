@@ -5,7 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ls
 
       - run: echo "Building project. Triggered by ${{ github.event_name }} "
       - run: ./build.sh
