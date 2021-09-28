@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ErrorMessage from './error_message'
 
 class PaymentForm extends React.Component {
   render() {
@@ -24,6 +25,7 @@ class PaymentForm extends React.Component {
         />
         <input
         type='submit' value='Pay forward'/>
+        <ErrorMessage />
       </form>
 
     )}
