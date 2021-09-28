@@ -1,17 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+class PaymentForm extends React.Component {
+  render() {
+    return (
+      <form>
+        <h1>Payment</h1>
+        <p>Recipient Name:</p>
+        <input
+          type="text"
+        />
+        <p>Recipient Ph#:</p>
+        <input
+          type="text"
+        />
+        <p>Quantity of funds:</p>
+        <input
+          type="text"
+        />
+        <p>Message:</p>
+        <input
+          type="text"
+        />
+        <input
+        type='submit' value='Pay forward'/>
+      </form>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    )}
+}
+
+ReactDOM.render(<PaymentForm />, document.getElementById('root'));
