@@ -14,6 +14,10 @@ function App() {
       .then((data) => setData(data.message));
   }, []);
 
+  React.useEffect(() => {
+    fetch("/test_database")
+      .then((res) => res.json());
+  }, []);
   //TODO: Return our own basic webpages
   return (
     <div className="App">
