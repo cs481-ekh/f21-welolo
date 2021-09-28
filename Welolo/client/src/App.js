@@ -14,18 +14,11 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
-
   
-
-  //TODO: Return our own basic webpages
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
-  );
+  React.useEffect(() => {
+    fetch("/test_database")
+      .then((res) => res.json());
+  }, []);
 }
 
 export default App;
