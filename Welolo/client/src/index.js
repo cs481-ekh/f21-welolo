@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ErrorMessage from './error_message'
-import SuccessfulPayment from './SuccessfulPayment.js';
+import SuccessfulPayment from './pages/SuccessfulPayment';
 
 
 class PaymentForm extends React.Component {
