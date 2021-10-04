@@ -4,6 +4,7 @@ then
     rm -rf ./Welolo/node_modules
     cd Welolo
     npm install mysql express 
+    npm install cypress --save -dev
     cd client
     npm install express
     exit 0
