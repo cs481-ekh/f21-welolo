@@ -38,8 +38,8 @@ The React.js components of the project are inside the client folder.
 ## Verification Steps for installing cypress and run tests:
 
     1. Run npm start both from server and client folders
-    1. Run "npm install cypress --save -dev" from Welolo folder (this step is already done)
-    1. Run "npm run cypress:open" or "npx cypress open" from Welolo folder
+    2. Run "npm install cypress --save -dev" from Welolo folder (this step is already done)
+    3. Run "npm run cypress:open" or "npx cypress open" from Welolo folder
 
 
 ##  Resources Used
