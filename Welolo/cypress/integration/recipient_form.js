@@ -39,3 +39,5 @@ describe('Verify input fields are present', () => {
         inputFields.reciepientPhone().type('2089192325').invoke('val').should('match', /[0-9]+$/)
         inputFields.fundQuantity().type('100').invoke('val').should('match', /[0-9]+$/)
         inputFields.message().type('We have paid $100').invoke('val').should('match', /[a-zA-Z0-9$]+$/)
+    })
+})
