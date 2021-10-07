@@ -26,7 +26,13 @@ app.get("/test_database", (req, res) => {
 
 app.get("/test", (req, res) => {
   res.json({ message: "This endpoint is working properly!" });
-  //TODO: Replace with our own functionality and change endpoint name
+});
+
+app.post("/initiate_payment", (req, res) => {
+  //TODO: Add payment processor functionality
+
+  //Currently looking into how to possibly send JSON data into this endpoint
+  //since we will have all the user entered transaction details to send to it
 });
 
 app.get("/payment_successful", (req, res) => {
