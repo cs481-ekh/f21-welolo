@@ -29,6 +29,10 @@ app.get("/test", (req, res) => {
   //TODO: Replace with our own functionality and change endpoint name
 });
 
+app.get("/payment_successful", (req, res) => {
+  res.json({message: "success"});
+});
+
 //TODO: Add other endpoints here
 
 app.listen(PORT, () => {
