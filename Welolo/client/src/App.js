@@ -12,6 +12,7 @@ function App() {
     fetch("/test")
       .then((res) => res.json())
       .then((data) => setData(data.message));
+      console.log(data);
   }, []);
   
   React.useEffect(() => {
