@@ -5,13 +5,8 @@ then
     cd Welolo
     npm install mysql express 
 
-    echo "Starting Node Server"
-    npm start&
-
-    echo "Starting React Server"
-    cd ./Welolo/client/
-    npm start & npx wait-on http://localhost:3000
-    npm start&
+    echo "Starting Servers"
+    npm start && cd ./Welolo/client/ && npm start
 
     exit 0
 else 
