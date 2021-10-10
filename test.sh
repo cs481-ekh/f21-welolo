@@ -1,7 +1,7 @@
 #!/bin/bash
 FILE=./Welolo/client/src/App.test.js
 if test -f "$FILE"; then
-    echo npx cypress run
+    npx cypress run
 else
     echo "Error: no test specified" 
     exit 127
