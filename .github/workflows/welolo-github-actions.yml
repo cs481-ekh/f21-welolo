@@ -10,6 +10,16 @@ jobs:
       - run: ./build.sh
       - run: echo "The build was a ${{ job.status }}."
 
+      - name: Starting servers
+        run: |
+        echo "Starting Node Server"
+        cd ./Welolo/
+        npm start & npx wait-on http://localhost:3001
+
+        echo "Starting React Server"
+        cd ./Welolo/client/
+        npm start & npx wait-on http://localhost:3000
+
       - run: echo "Running Tests"
       - run: ./test.sh
       - run: echo "Tests were a ${{ job.status }}."
