@@ -4,6 +4,10 @@ then
     rm -rf ./Welolo/node_modules
     cd Welolo
     npm install mysql express 
+    cd ./Welolo/
+    npm start
+    cd ./Welolo/client/
+    npm start
     exit 0
 else 
     cd Welolo
