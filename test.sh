@@ -1,8 +1,7 @@
 #!/bin/bash
 FILE=./Welolo/client/src/App.test.js
 if test -f "$FILE"; then
-    echo "Yes it exists"
-    exit 0
+    echo npx cypress run
 else
     echo "Error: no test specified" 
     exit 127
