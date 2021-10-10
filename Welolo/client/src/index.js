@@ -11,22 +11,22 @@ class PaymentForm extends React.Component {
         <h1>Payment</h1>
         <p>Recipient Name:</p>
         <input
-          type="text"
+          type="text" data-cy="recipient_name"
         />
         <p>Recipient Ph#:</p>
         <input
-          type="text"
+          type="text" data-cy="recipient_ph"
         />
         <p>Quantity of funds:</p>
         <input
-          type="text"
+          type="text" data-cy="fund_quantity"
         />
         <p>Message:</p>
         <input
-          type="text"
+          type="text" data-cy="message"
         />
         <input
-        type='submit' value='Pay forward'/>
+        type='submit' value='Pay forward' data-cy="submit"/>
         <ErrorMessage />
         <SuccessfulPayment />
       </form>
