@@ -6,7 +6,8 @@
   "scripts": {
     "test": "../test.sh",
     "start": "node server/index.js",
-    "clean": "../clean.sh"
+    "clean": "../clean.sh",
+    "cypress:open": "cypress open"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,8 @@
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "twilio": "^3.69.0"
+  },
+  "devDependencies": {
+    "cypress": "^8.5.0"
   }
 }
