@@ -2,8 +2,8 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const twilio_client = require('twilio')(
-  "ACa515f700d0d94b51e2f49edb8b3273cd",
-  "eb412a5cc685198dfcad87ae3d728826"
+  TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN
 );
 const mysql = require("mysql");
 const app = express();
@@ -25,7 +25,7 @@ app.post("/api/send_message", (req,res) => {
   res.header('Content-Type', 'application/json');
   twilio_client.messages
     .create({
-      from: "+15076505970",
+      from: TWILIO_PHONE_NUMBER,
       to: req.body.recipient,
       body: req.body.body
     })

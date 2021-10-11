@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SMS_Sender extends Component {
+class SMS_SENDER extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -85,4 +85,4 @@ class SMS_Sender extends Component {
     }
 }
 
-export default SMS_Sender;
+export default SMS_SENDER;
