@@ -29,6 +29,12 @@ app.get("/test", (req, res) => {
   //TODO: Replace with our own functionality and change endpoint name
 });
 
+app.post("/", (req, res) => {
+  res.json({ message: "Form is valid!"});
+  //TODO: Replace with our own functionality and change endpoint name
+});
+
+
 app.get("/payment_successful", (req, res) => {
   res.json({message: "success"});
 });

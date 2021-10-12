@@ -9,9 +9,16 @@ class PaymentForm extends React.Component {
     super(props);
 
     this.state = {
-      fields: {},
+      fields: {
+        recipientname: '', 
+        recipientph: '',
+        fundquantity: '',
+        message: ''
+      },
       errors: {},
     };
+    this.handleValidation = this.handleValidation.bind(this);
+
   }
 
   handleValidation() {
@@ -44,15 +51,26 @@ class PaymentForm extends React.Component {
     }
 
     if (typeof fields["recipientph"] !== "undefined") {
-      if (!fields["recipientph"].match(/^\d+$/)) {
+      if (!fields["recipientph"].match(/^\+?[1 ]?(\d{10})$/)) {
         formIsValid = false;
-        errors["recipientph"] = "Only numbers are allowed";
+        errors["recipientph"] = "Allowed formats are 3081353543 or +3081353543 or 13081353543 or +13081353543";
+      }
+      if(!formIsValid){
+        if(fields["recipientph"].length === 10){
+          fields["recipientph"] = "+1"+fields["recipientph"];
+        }
+        if(fields["recipientph"].length === 11 && fields["recipientph"].indexOf("+") === 0){
+          fields["recipientph"].replace("+", "+1");
+        }
+        if(fields["recipientph"].length === 11 && fields["recipientph"].indexOf("1") === 0){
+          fields["recipientph"].replace("1", "+1");
+        }
       }
     }
 
-    if (fields["recipientph"].length > 10) {
+    if (fields["recipientph"].length > 16) {
       formIsValid = false;
-        errors["recipientph"] = "Sorry, the phone number is too long";
+      errors["recipientph"] = "Sorry, the phone number is too long";
     }
 
     //fund quantity
@@ -82,21 +100,23 @@ class PaymentForm extends React.Component {
     e.preventDefault();
 
     if (this.handleValidation()) {
-      const data = new FormData(e.target);
-    
       fetch('/', {
         method: 'POST',
-        body: data,
+        body: JSON.stringify(this.state.fields)
       });
     } else {
       alert("Please fill out all the inputs. Enter numbers for phone number and fund and letters for name and message.")
     }
   }
 
-  handleChange(field, e) {
+  handleChange(e) {
     let fields = this.state.fields;
-    fields[field] = e.target.value;
-    this.setState({ fields });
+    const name = e.target.name;
+    const value = e.target.value;
+    fields[name] = value;
+    this.setState({
+      fields
+    });
   }
 
   render() {
@@ -107,16 +127,16 @@ class PaymentForm extends React.Component {
           <h1>Payment</h1>
           <p>Recipient Name:</p>
           <input
-            type="text" data-cy="recipient_name" name="recipientname" value={this.state.fields["recipientname"]} onChange={this.handleChange.bind(this, "recipientname")} /> <br/>
+            type="text" data-cy="recipient_name" name="recipientname" defaultValue={this.state.fields.recipientname} onChange={(event) => this.handleChange(event)} /> <br/>
           <p>Recipient Ph#:</p>
           <input
-            type="number" data-cy="recipient_ph" name="recipientph" value={this.state.fields["recipientph"]} onChange={this.handleChange.bind(this, "recipientph")} /> <br/>
+            type="number" data-cy="recipient_ph" name="recipientph" defaultValue={this.state.fields.recipientph} onChange={(event) => this.handleChange(event)} /> <br/>
           <p>Quantity of funds:</p>
           <input
-            type="number" data-cy="fund_quantity" name="fundquantity" value={this.state.fields["fundquantity"]}  onChange={this.handleChange.bind(this, "fundquantity")}  /> <br/>
+            type="number" data-cy="fund_quantity" name="fundquantity" defaultValue={this.state.fields.fundquantity}  onChange={(event) => this.handleChange(event)}  /> <br/>
           <p>Message:</p>
           <input
-            type="text" data-cy="message" name="message" value={this.state.fields["message"]} onChange={this.handleChange.bind(this, "message")} /> <br/>
+            type="text" data-cy="message" name="message" defaultValue={this.state.fields.message} onChange={(event) => this.handleChange(event)} /> <br/>
           <input
           type='submit' value='Pay forward' data-cy="submit"/>
         <ErrorMessage />
