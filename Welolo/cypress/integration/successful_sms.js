@@ -12,8 +12,8 @@ describe('Verify Successful SMS', () => {
         inputFields.message().should('be.visible')
         inputFields.submit().should('be.visible')
     })
-    it('Verify success with valid phone number', () => {
-        inputFields.recipientName(),type('John')
+    it('Verify values placed in the correct place', () => {
+        inputFields.recipientName().type('John')
         inputFields.recipientPhone().type('+17025763855')
         inputFields.fundQuantity().type('100')
         inputFields.message().type('We have paid $100');
@@ -21,5 +21,21 @@ describe('Verify Successful SMS', () => {
         inputFields.recipientPhone().invoke('val').should('eq', '+17025763855')
         inputFields.fundQuantity().invoke('val').should('eq', '100')
         inputFields.message().invoke('val').should('eq', 'We have paid $100')
+    })
+    it('Verify SMS successful on valid input', () => {
+        inputFields.recipientName().type('John')
+        inputFields.recipientPhone().type('+17025763855')
+        inputFields.fundQuantity().type('100')
+        inputFields.message().type('We have paid $100');
+        inputFields.recipientName().invoke('val').should('eq', 'John')
+        inputFields.recipientPhone().invoke('val').should('eq', '+17025763855')
+        inputFields.fundQuantity().invoke('val').should('eq', '100')
+        inputFields.message().invoke('val').should('eq', 'We have paid $100')
+
+        cy.server();
+        cy.route('POST', '/api/send_message/').as('send_message');
+        inputFields.submit().click();
+        cy.wait(['@send_message'], { responseTimeout: 15000 });
+
     })
 })
