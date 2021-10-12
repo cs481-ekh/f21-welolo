@@ -9,29 +9,15 @@ class SMS_SENDER extends Component {
                 body: ''
             },
             submitting: false,
-            error: false
+            error: false,
+            errormessages: {
+                status : '',
+                code : '', 
+                moreInfo: ''
+            }
         };
         this.onHandleChange = this.onHandleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.SmsErrorHandler = this.SmsErrorHandler.bind(this);
-    }
-
-    SmsErrorHandler() {
-      const [error, setError] = useState(null);
-  
-      React.useEffect(() => {
-          fetch("/api/send_message")
-              .then((res) => res.json())
-              .then((error) => setError(error.errormessage));
-      }, []);
-  
-        return (
-          <div className="smsError">
-              <h1>
-                  {error.errormessage}
-              </h1>
-          </div>
-        );
     }
 
     onHandleChange(event) {
@@ -64,45 +50,51 @@ class SMS_SENDER extends Component {
               });
             } else {
                 console.log("Think there's an error?");
+                const name = event.target.getAttribute('name');
               this.setState({
                 error: true,
-                submitting: false
+                submitting: false,
+                errormessages: { ...data.errormessage, [name]: event.target.value }
               });
-              return (<SmsErrorHandler/>);
             }
           });
     }
     
     render() {
+      if(this.state.error === true){
+        return (<div><h1> We were unable to complete the transaction because of the following error: </h1>
+          <h3>Status: {this.state.errormessages.status}</h3>
+          <h3>Code: {this.state.errormessages.code}</h3>
+          <h3>More Info: {this.state.errormessages.moreInfo}</h3>
+        </div>)
+      }
         return (
             <form
-                onSubmit={this.onSubmit}
-            >
-                <div>
-                    <label htmlFor="recipient">Recipient:</label>
-                    <input
-                        type="tel"
-                        name="recipient"
-                        id="recipient"
-                        value={this.state.message.recipient}
-                        onChange={this.onHandleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="body">Message:</label>
-                    <textarea 
-                        name="body"
-                        id="body"
-                        value={this.state.message.body}
-                        onChange={this.onHandleChange}
-                    />
-                </div>
-                <button type="submit" disabled={this.state.submitting}>
-                    Send message
-                </button>
-            </form>
+            onSubmit={this.onSubmit}
+          >
+            <div>
+              <label htmlFor="recipient">Recipient:</label>
+              <input
+                type="tel"
+                name="recipient"
+                id="recipient"
+                value={this.state.message.recipient}
+                onChange={this.onHandleChange} />
+            </div>
+            <div>
+              <label htmlFor="body">Message:</label>
+              <textarea
+                name="body"
+                id="body"
+                value={this.state.message.body}
+                onChange={this.onHandleChange} />
+            </div>
+            <button type="submit" disabled={this.state.submitting}>
+              Send message
+            </button>
+          </form>
         );
-    }
-}
+      }
+}    
 
 export default SMS_SENDER;

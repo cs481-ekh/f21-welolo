@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ErrorMessage from './error_message'
-import SuccessfulPayment from './SuccessfulPayment.js';
-import SMS_SENDER from './components/SMS_SENDER.js';
+import SuccessfulPayment from './pages/SuccessfulPayment.js';
+import SMS_SENDER from './components/SMS_Sender.js';
 
 class PaymentForm extends React.Component {
   render() {
