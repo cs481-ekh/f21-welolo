@@ -4,9 +4,10 @@ then
     rm -rf ./Welolo/node_modules
     cd Welolo
     npm install mysql express 
+    npm install concurrently -g concurrently
 
     echo "Starting Servers"
-    npm start && cd ./Welolo/client/ && npm start
+    concurrently "./start_node_server.sh" "./start_react_server.sh"
 
     exit 0
 else 
