@@ -93,19 +93,23 @@ class PaymentForm extends React.Component {
     }
 
     this.setState({ errors: errors });
-    return formIsValid;
+    return errors;
   }
 
   submitHandler(e) {
     e.preventDefault();
-
-    if (this.handleValidation()) {
+    let errors=this.handleValidation()
+    if (errors === null) {
       fetch('/', {
         method: 'POST',
         body: JSON.stringify(this.state.fields)
       });
     } else {
-      alert("Please fill out all the inputs. Enter numbers for phone number and fund and letters for name and message.")
+      var output = '';
+      for (var property in errors) {
+        output += property + ': ' + errors[property]+'; ';
+      }
+      alert(output)
     }
   }
 
@@ -130,7 +134,7 @@ class PaymentForm extends React.Component {
             type="text" data-cy="recipient_name" name="recipientname" defaultValue={this.state.fields.recipientname} onChange={(event) => this.handleChange(event)} /> <br/>
           <p>Recipient Ph#:</p>
           <input
-            type="number" data-cy="recipient_ph" name="recipientph" defaultValue={this.state.fields.recipientph} onChange={(event) => this.handleChange(event)} /> <br/>
+            type="text" data-cy="recipient_ph" name="recipientph" defaultValue={this.state.fields.recipientph} onChange={(event) => this.handleChange(event)} /> <br/>
           <p>Quantity of funds:</p>
           <input
             type="number" data-cy="fund_quantity" name="fundquantity" defaultValue={this.state.fields.fundquantity}  onChange={(event) => this.handleChange(event)}  /> <br/>
