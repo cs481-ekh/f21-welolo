@@ -8,7 +8,7 @@ then
 
     echo "Starting Servers"
     concurrently "./start_node_server.sh" "./start_react_serversh"
-    sleep 30
+    sleep 1000000
     exit 0
 else 
     cd Welolo
