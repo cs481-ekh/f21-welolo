@@ -7,7 +7,7 @@ then
     npm install concurrently -g concurrently
 
     echo "Starting Servers"
-    concurrently "./start_node_server.sh" "./start_react_serversh"
+    concurrently "./start_node_server.sh" "./start_react_serversh" "sleep 100"
 
     exit 0
 else 
