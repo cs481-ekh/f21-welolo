@@ -1,17 +1,44 @@
 // server/index.js
-
+console.log(require('dotenv').config());
 const express = require("express");
-
-const PORT = process.env.PORT || 3001;
-
-const app = express();
-
+const bodyParser = require('body-parser');
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
+console.log(accountSid);
+console.log(authToken);
+console.log(process.env);
+const twilio_client = require('twilio')(accountSid, authToken);
 const mysql = require("mysql");
+const app = express();
+const PORT = process.env.PORT || 3001;
 const db = mysql.createPool({
   host: "localhost",
   user: "WeloloApp",
   password: "password",
   database: "Welolo"
+});
+
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+// send message
+app.post("/api/send_message", (req,res) => {
+  res.header('Content-Type', 'application/json');
+  twilio_client.messages
+    .create({
+      from: weloloPhoneNumber,
+      to: req.body.recipient,
+      body: req.body.body
+    })
+    .then(() => {
+      res.send(JSON.stringify({ success: true }));
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(JSON.stringify({ success: false }));
+    });
 });
 
 app.get("/test_database", (req, res) => {
