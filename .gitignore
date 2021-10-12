@@ -1,3 +1,4 @@
-
-./Welolo/node_modules
-./Welolo/client/node_modules
+# dependancies 
+*.env
+/Welolo/node_modules/*
+/Welolo/client/node_modules/*
