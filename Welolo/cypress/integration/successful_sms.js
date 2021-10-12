@@ -13,6 +13,13 @@ describe('Verify Successful SMS', () => {
         inputFields.submit().should('be.visible')
     })
     it('Verify success with valid phone number', () => {
-        inputFields.recipientName
+        inputFields.recipientName(),type('John')
+        inputFields.recipientPhone().type('+17025763855')
+        inputFields.fundQuantity().type('100')
+        inputFields.message().type('We have paid $100');
+        inputFields.recipientName().invoke('val').should('eq', 'John')
+        inputFields.recipientPhone().invoke('val').should('eq', '+17025763855')
+        inputFields.fundQuantity().invoke('val').should('eq', '100')
+        inputFields.message().invoke('val').should('eq', 'We have paid $100')
     })
 })

@@ -62,6 +62,7 @@ class SMS_SENDER extends Component {
                     <label htmlFor="recipient">Recipient:</label>
                     <input
                         type="tel"
+                        data-cy="recipient_ph"
                         name="recipient"
                         id="recipient"
                         value={this.state.message.recipient}
@@ -71,14 +72,16 @@ class SMS_SENDER extends Component {
                 <div>
                     <label htmlFor="body">Message:</label>
                     <textarea 
+                        type="text"
+                        data-cy="message"
                         name="body"
                         id="body"
                         value={this.state.message.body}
                         onChange={this.onHandleChange}
                     />
                 </div>
-                <button type="submit" disabled={this.state.submitting}>
-                    Send message
+                <button type="submit" data-cy="submit" disabled={this.state.submitting}>
+                    Pay forward
                 </button>
             </form>
         );
