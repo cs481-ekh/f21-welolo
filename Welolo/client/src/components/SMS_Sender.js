@@ -13,6 +13,25 @@ class SMS_SENDER extends Component {
         };
         this.onHandleChange = this.onHandleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.SmsErrorHandler = this.SmsErrorHandler.bind(this);
+    }
+
+    SmsErrorHandler() {
+      const [error, setError] = useState(null);
+  
+      React.useEffect(() => {
+          fetch("/api/send_message")
+              .then((res) => res.json())
+              .then((error) => setError(error.errormessage));
+      }, []);
+  
+        return (
+          <div className="smsError">
+              <h1>
+                  {error.errormessage}
+              </h1>
+          </div>
+        );
     }
 
     onHandleChange(event) {
@@ -49,6 +68,7 @@ class SMS_SENDER extends Component {
                 error: true,
                 submitting: false
               });
+              return (<SmsErrorHandler/>);
             }
           });
     }

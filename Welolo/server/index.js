@@ -37,7 +37,7 @@ app.post("/api/send_message", (req,res) => {
     })
     .catch(err => {
       console.log(err);
-      res.send(JSON.stringify({ success: false }));
+      res.send(JSON.stringify({errormessage: err, success: false }));
     });
 });
 
