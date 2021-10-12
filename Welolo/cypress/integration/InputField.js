@@ -1,9 +1,9 @@
 class InputField{
 
-    reciepientName(){
+    recipientName(){
         return cy.get("[data-cy=recipient_name]")
     }
-    reciepientPhone(){
+    recipientPhone(){
         return cy.get("[data-cy=recipient_ph]")
     }
     fundQuantity(){
