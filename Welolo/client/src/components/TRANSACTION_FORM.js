@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import {sendSMS} from './../util/SMS_SENDER.js';
+
 class TRANSACTION_FORM extends Component {
     constructor(props) {
         super(props);
