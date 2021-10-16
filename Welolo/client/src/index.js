@@ -10,9 +10,7 @@ class PaymentForm extends React.Component {
     return (
       <div>
         <br/>
-        <SMS_SENDER />
-        <ErrorMessage />
-        <SuccessfulPayment />
+        <TRANSACTION_INIT />
       </div>
 
     )}

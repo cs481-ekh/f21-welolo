@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-
 export function sendSMS(transactionData) {
   fetch("/api/send_message", {
     method: 'POST',

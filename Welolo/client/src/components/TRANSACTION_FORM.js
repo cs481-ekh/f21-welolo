@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import {sendSMS} from './../util/SMS_SENDER.js';
+import { sendSMS } from './../util/SMS_SENDER.js';
+import { sendPayment } from "./../util/PAYMENT_SENDER.js";
 
 class TRANSACTION_FORM extends Component {
     constructor(props) {
