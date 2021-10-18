@@ -8,10 +8,6 @@ export function sendSMS(transactionData) {
   })
     .then(res => res.json())
     .then(data => {
-      if (data.success) {
-        return 1
-      } else {
-        return 0
-      }
+      return data.success
     });
 }

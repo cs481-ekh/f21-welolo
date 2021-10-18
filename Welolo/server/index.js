@@ -1,13 +1,10 @@
 // server/index.js
-console.log(require('dotenv').config());
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require('body-parser');
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
-console.log(accountSid);
-console.log(authToken);
-console.log(process.env);
 const twilio_client = require('twilio')(accountSid, authToken);
 const mysql = require("mysql");
 const app = express();
@@ -22,6 +19,16 @@ const db = mysql.createPool({
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+
+app.post("/api/dummy_endpoint"), (req,res) => {
+  res.header('Content-type', 'application/json');
+  res.send(JSON.stringify({ success: false }));
+}
+// send a payment
+app.post("/api/send_payment", (req,res) => {
+  res.header('Content-Type','application/json');
+  res.send(JSON.stringify({ success: false }));
+});
 
 // send message
 app.post("/api/send_message", (req,res) => {

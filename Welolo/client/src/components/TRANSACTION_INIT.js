@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TRANSACTION_FORM from './TRANSACTION_FORM.js;'
+import TRANSACTION_FORM from './TRANSACTION_FORM.js';
 
 class TRANSACTION_INIT extends Component {
     render() {

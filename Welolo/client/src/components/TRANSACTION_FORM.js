@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import { sendSMS } from './../util/SMS_SENDER.js';
-import { sendPayment } from "./../util/PAYMENT_SENDER.js";
+
+import { sendPayment } from './../util/sendPayment.js';
 
 class TRANSACTION_FORM extends Component {
     constructor(props) {
@@ -31,8 +32,8 @@ class TRANSACTION_FORM extends Component {
         event.preventDefault();
         this.setState({ submitting: true });
         var transactionData = JSON.stringify(this.state.message)
-        
-        if(sendPayment(transactionData)) {
+        var successfulPayment = sendPayment(transactionData)
+        if(successfulPayment) {
             if(sendSMS(transactionData)) {
                 // SMS succeeded
                 this.setState({
@@ -54,7 +55,7 @@ class TRANSACTION_FORM extends Component {
                 });
             }
         } else {
-            console.log("sendPaymetn(...) didn't return true :(")
+           console.log("sendPayment(...) didn't return true :(")
         }
     }
 
