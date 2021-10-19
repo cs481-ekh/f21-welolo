@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { sendSMS } from './../util/SMS_SENDER.js';
+import { sendSMS } from '../util/sendSMS.js';
 
 import { sendPayment } from './../util/sendPayment.js';
 
@@ -28,13 +28,28 @@ class TRANSACTION_FORM extends Component {
         });
     }
 
-    onSubmit(event) {
+    async onSubmit(event) {
         event.preventDefault();
         this.setState({ submitting: true });
         var transactionData = JSON.stringify(this.state.message)
-        var successfulPayment = sendPayment(transactionData)
+        // actually attempts payment
+        var successfulPayment = await sendPayment(transactionData)
+            .then(res => res.json())
+            .then(data => { return data.success })
+            .catch(err => {
+                console.log(err)
+                return false
+            })
         if(successfulPayment) {
-            if(sendSMS(transactionData)) {
+            //actually attempts sms
+            var successfulSMS = await sendSMS(transactionData)
+                .then(res => res.json())
+                .then(data => { return data.success })
+                .catch(err => {
+                    console.log(err)
+                    return false
+                })
+            if(successfulSMS) {
                 // SMS succeeded
                 this.setState({
                     error:false, // should do the opposite if error state is false
@@ -55,7 +70,7 @@ class TRANSACTION_FORM extends Component {
                 });
             }
         } else {
-           console.log("sendPayment(...) didn't return true :(")
+           console.log("error in TRANSACTION_FORM.js -- Payment Failed")
         }
     }
 

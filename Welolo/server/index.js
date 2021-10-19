@@ -27,7 +27,7 @@ app.post("/api/dummy_endpoint"), (req,res) => {
 // send a payment
 app.post("/api/send_payment", (req,res) => {
   res.header('Content-Type','application/json');
-  res.send(JSON.stringify({ success: false }));
+  res.send(JSON.stringify({ success: true }));
 });
 
 // send message
