@@ -6,9 +6,7 @@ then
     npm install mysql express 
 
     echo "Starting Servers"
-    ./start_node_server.sh &
-    ./start_react_server.sh &
-    sleep 10000000
+    ./start_node_server.sh 
     exit 0
 else 
     cd Welolo
