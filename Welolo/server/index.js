@@ -1,15 +1,29 @@
 // server/index.js
 require('dotenv').config();
-const express = require("express");
-const bodyParser = require('body-parser');
+import express from "express";
+import { urlencoded, json } from 'body-parser';
+const app = express();
+
+// SMS
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const twilio_client = require('twilio')(accountSid, authToken);
-const mysql = require("mysql");
-const app = express();
+
+// Gravity
+const oid = process.env.GRAVITY_OID;
+const authToken = provess.env.GRAVITY_AUTH_TOKEN;
+const environmentUrl = provess.env.GRAVITY_ENVIRONMENT_URL;
+const emergepay = new SharedWorker.emergepaySdk({
+  oid: oid,
+  authToken: authToken,
+  environmentUrl: environmentUrl
+});
+
+// DB
+import { createPool } from "mysql";
 const PORT = process.env.PORT || 3001;
-const db = mysql.createPool({
+const db = createPool({
   host: "localhost",
   user: "WeloloApp",
   password: "password",
@@ -17,8 +31,8 @@ const db = mysql.createPool({
 });
 
 
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
+app.use(urlencoded({extended:false}));
+app.use(json());
 
 app.post("/api/dummy_endpoint"), (req,res) => {
   res.header('Content-type', 'application/json');
