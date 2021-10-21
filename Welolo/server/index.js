@@ -1,38 +1,39 @@
-// server/index.js
+// Application
 require('dotenv').config();
-import express from "express";
-import { urlencoded, json } from 'body-parser';
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(cors());
+app.use(bodyParser.json());
 
 // SMS
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
-const twilio_client = require('twilio')(accountSid, authToken);
+const twilio_client = require('twilio')(accountSid, twilioAuthToken);
 
 // Gravity
+const sdk = require("emergepay-sdk");
 const oid = process.env.GRAVITY_OID;
-const authToken = provess.env.GRAVITY_AUTH_TOKEN;
-const environmentUrl = provess.env.GRAVITY_ENVIRONMENT_URL;
-const emergepay = new SharedWorker.emergepaySdk({
+const gravityAuthToken = process.env.GRAVITY_AUTH_TOKEN;
+const environmentUrl = process.env.GRAVITY_ENVIRONMENT_URL;
+const emergepay = new sdk.emergepaySdk({
   oid: oid,
-  authToken: authToken,
+  twilioAuthToken: gravityAuthToken,
   environmentUrl: environmentUrl
 });
 
 // DB
-import { createPool } from "mysql";
+const mysql = require("mysql");
 const PORT = process.env.PORT || 3001;
-const db = createPool({
+const db = mysql.createPool({
   host: "localhost",
   user: "WeloloApp",
   password: "password",
   database: "Welolo"
 });
-
-
-app.use(urlencoded({extended:false}));
-app.use(json());
 
 app.post("/api/dummy_endpoint"), (req,res) => {
   res.header('Content-type', 'application/json');
@@ -40,8 +41,32 @@ app.post("/api/dummy_endpoint"), (req,res) => {
 }
 // send a payment
 app.post("/api/send_payment", (req,res) => {
-  res.header('Content-Type','application/json');
-  res.send(JSON.stringify({ success: true }));
+  var amount = "0.01"
+  var config = {
+    transactionType: sdk.TransactionType.CreditAuth,
+    method: "modal",
+    fields: [
+      {
+        id: "base_amount",
+        value: amount
+      },
+      {
+        id: "external_tran_id",
+        value: emergepay.getExternalTransactionId()
+      }
+    ]
+  }
+  console.log("This is as far as I can go! Step 2 will generate a transaction token to allow us to keep going here")
+  emergepay.startTransaction(config)
+    .then(function (transactionToken) {
+      res.send({
+        transactionToken: transactionToken
+      })
+    })
+    .catch(function (err) {
+      console.log(err.message);
+      res.send(err.message);
+    })
 });
 
 // send message
