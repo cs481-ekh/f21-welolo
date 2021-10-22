@@ -117,47 +117,65 @@ class TRANSACTION_FORM extends Component {
 
     async onSubmit(event) {
         event.preventDefault();
-        this.setState({ submitting: true });
-        var transactionData = JSON.stringify(this.state.message)
-        // actually attempts payment
-        var successfulPayment = await sendPayment(transactionData)
-            .then(res => res.json())
-            .then(data => { return data.success })
-            .catch(err => {
-                console.log(err)
-                return false
-            })
-        if(successfulPayment) {
-            //actually attempts sms
-            var successfulSMS = await sendSMS(transactionData)
-                .then(res => res.json())
-                .then(data => { return data.success })
-                .catch(err => {
-                    console.log(err)
-                    return false
-                })
-            if(successfulSMS) {
-                // SMS succeeded
-                this.setState({
-                    error:false, // should do the opposite if error state is false
-                    submitting:false,
-                    message:{
-                        recipient_name: '',
-                        recipient: '',
-                        sender_quantity: '',
-                        body: ''
-                    }
-                });
-            } else {
-                // SMS failed
-                console.log("error in TRANSACTION_FORM.js -- SMS Failed")
-                this.setState({
-                    error: true, // should do something if error state is true
-                    submitting: false
-                });
-            }
+        //validate input fields
+        let errors=this.handleValidation()
+        if (errors === null) {
+          fetch('/', {
+            method: 'POST',
+            body: JSON.stringify(this.state.fields)
+          });
         } else {
-           console.log("error in TRANSACTION_FORM.js -- Payment Failed")
+          var output = '';
+          for (var property in errors) {
+            output += property + ': ' + errors[property]+'; ';
+          }
+          if (Object.keys(errors).length !== 0) {
+            alert(output)
+          }
+        }
+        if (Object.keys(errors).length === 0) {
+          this.setState({ submitting: true });
+          var transactionData = JSON.stringify(this.state.message)
+          // actually attempts payment
+          var successfulPayment = await sendPayment(transactionData)
+              .then(res => res.json())
+              .then(data => { return data.success })
+              .catch(err => {
+                  console.log(err)
+                  return false
+              })
+          if(successfulPayment) {
+              //actually attempts sms
+              var successfulSMS = await sendSMS(transactionData)
+                  .then(res => res.json())
+                  .then(data => { return data.success })
+                  .catch(err => {
+                      console.log(err)
+                      return false
+                  })
+              if(successfulSMS) {
+                  // SMS succeeded
+                  this.setState({
+                      error:false, // should do the opposite if error state is false
+                      submitting:false,
+                      message:{
+                          recipient_name: '',
+                          recipient: '',
+                          sender_quantity: '',
+                          body: ''
+                      }
+                  });
+              } else {
+                  // SMS failed
+                  console.log("error in TRANSACTION_FORM.js -- SMS Failed")
+                  this.setState({
+                      error: true, // should do something if error state is true
+                      submitting: false
+                  });
+              }
+          } else {
+            console.log("error in TRANSACTION_FORM.js -- Payment Failed")
+          }
         }
     }
 
