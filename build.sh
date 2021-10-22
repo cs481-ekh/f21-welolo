@@ -7,6 +7,8 @@ then
     npm install
     npm install dotenv --save
     npm install mysql express twilio
+    npm install cors
+    npm install emergepay-sdk
     npm install cypress --save -dev
     cd client
     npm install express
@@ -16,6 +18,8 @@ else
     npm install
     npm install dotenv --save
     npm install mysql express twilio
+    npm install emergepay-sdk
+    npm install cors
     npm install cypress --save -dev
     cd client
     npm install express
