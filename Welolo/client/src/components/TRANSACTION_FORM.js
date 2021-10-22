@@ -16,10 +16,12 @@ class TRANSACTION_FORM extends Component {
             },
             
             submitting: false,
-            error: false
+            error: false,
+            errors: {},
         };
         this.onHandleChange = this.onHandleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleValidation = this.handleValidation.bind(this);
     }
 
     onHandleChange(event) {
@@ -29,7 +31,92 @@ class TRANSACTION_FORM extends Component {
         });
     }
 
-    async onSubmit(event) {
+    handleChange(e) {
+        let fields = this.state.fields;
+        const name = e.target.name;
+        const value = e.target.value;
+        fields[name] = value;
+        this.setState({
+          fields
+        });
+      }
+
+    handleValidation() {
+        let fields = this.state.message;
+        let errors = {};
+        let formIsValid = true;
+    
+        //recipient name
+        if (!fields["recipient_name"]) {
+          formIsValid = false;
+          errors["recipient_name"] = "Please insert the recipient name";
+        }
+    
+        if (typeof fields["recipient_name"] !== "undefined") {
+          if (!fields["recipient_name"].match(/^[a-zA-Z]+$/)) {
+            formIsValid = false;
+            errors["recipient_name"] = "Only letters are allowed";
+          }
+        }
+    
+        if (fields["recipient_name"].length > 30) {
+          formIsValid = false;
+            errors["recipient_name"] = "Sorry, the name is too long";
+        }
+    
+        //recipient phone
+        if (!fields["recipient"]) {
+          formIsValid = false;
+          errors["recipient"] = "Please insert the recipient phone number";
+        }
+    
+        if (typeof fields["recipient"] !== "undefined") {
+          if (!fields["recipient"].match(/^\+?[1 ]?(\d{10})$/)) {
+            formIsValid = false;
+            errors["recipient"] = "Allowed formats are 3081353543 or +3081353543 or 13081353543 or +13081353543";
+          }
+          if(!formIsValid){
+            if(fields["recipient"].length === 10){
+              fields["recipient"] = "+1"+fields["recipient"];
+            }
+            if(fields["recipient"].length === 11 && fields["recipient"].indexOf("+") === 0){
+              fields["recipient"].replace("+", "+1");
+            }
+            if(fields["recipient"].length === 11 && fields["recipient"].indexOf("1") === 0){
+              fields["recipient"].replace("1", "+1");
+            }
+          }
+        }
+    
+        if (fields["recipient"].length > 16) {
+          formIsValid = false;
+          errors["recipient"] = "Sorry, the phone number is too long";
+        }
+    
+        //send quantity
+        if (!fields["sender_quantity"]) {
+          formIsValid = false;
+          errors["sender_quantity"] = "Please insert the fund amount";
+        }
+    
+        if (typeof fields["sender_quantity"] !== "undefined") {
+          if (!fields["sender_quantity"].match(/^\d+$/)) {
+            formIsValid = false;
+            errors["sender_quantity"] = "Only numbers are allowed";
+          }
+        }
+    
+        //message
+        if (!fields["body"]) {
+          formIsValid = false;
+          errors["body"] = "Please insert a message";
+        }
+    
+        this.setState({ errors: errors });
+        return errors;
+      }    
+
+      async onSubmit(event) {
         event.preventDefault();
         this.setState({ submitting: true });
         var transactionData = JSON.stringify(this.state.message)
@@ -45,7 +132,8 @@ class TRANSACTION_FORM extends Component {
             //actually attempts sms
             var successfulSMS = await sendSMS(transactionData)
                 .then(res => res.json())
-                .then(data => { return data.success })
+                .then(data => {
+                    return data.success })
                 .catch(err => {
                     return false
                 })
