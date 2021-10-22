@@ -14,11 +14,6 @@ class TRANSACTION_FORM extends Component {
                 sender_quantity: '',
                 body: ''
             },
-            errormessages: {
-                status : '',
-                code : '', 
-                moreInfo: ''
-            },
             submitting: false,
             error: false
         };
@@ -49,12 +44,7 @@ class TRANSACTION_FORM extends Component {
             //actually attempts sms
             var successfulSMS = await sendSMS(transactionData)
                 .then(res => res.json())
-                .then(data => { 
-                    const name = event.target.getAttribute('name');
-                    console.log(data)
-                    this.setState({
-                      errormessages: { ...data.errormessage, [name]: event.target.value }
-                    })
+                .then(data => {
                     return data.success })
                 .catch(err => {
                     return false
@@ -84,64 +74,58 @@ class TRANSACTION_FORM extends Component {
         }
     }
 
-    render(){ 
-        if(this.state.error === true){
-            return (<div><h1> We were unable to complete the transaction because of the following error: </h1>
-              <h3>Status: {this.state.errormessages.status}</h3>
-              <h3>Code: {this.state.errormessages.code}</h3>
-              <p>More Info:<a href={this.state.errormessages.moreInfo}>{this.state.errormessages.moreInfo}</a></p>
-            </div>)
-          }
-        
+    render(){
         return (
-            <form onSubmit={this.onSubmit}>
-                <h1>Payment</h1>
-                <div>
-                    <label htmlFor="recipient_name">Recipient Name:</label>
-                    <input 
-                        type="text"
-                        name="recipient_name"
-                        id="recipient_name"
-                        value={this.state.message.recipient_name}
-                        onChange={this.onHandleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="recipient">Recipient Phone Number (ex: +12223334444):</label>
-                    <input
-                        type="tel"
-                        name="recipient"
-                        id="recipient"
-                        value={this.state.message.recipient}
-                        onChange={this.onHandleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="sender_quantity">Quantity (USD):</label>
-                    <input
-                        type="text"
-                        name="sender_quantity"
-                        id="sender_quantity"
-                        value={this.state.message.sender_quantity}
-                        onChange={this.onHandleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="body">Message:</label>
-                    <textarea 
-                        name="body"
-                        id="body"
-                        value={this.state.message.body}
-                        onChange={this.onHandleChange}
-                    />
-                </div>
-                <button type="submit" disabled={this.state.submitting}>
-                    Send message
-                </button>
-            </form>
+            <div>
+                <form onSubmit={this.onSubmit}>
+                    <h1>Payment</h1>
+                    <div>
+                        <label htmlFor="recipient_name">Recipient Name:</label>
+                        <input 
+                            type="text"
+                            name="recipient_name"
+                            id="recipient_name"
+                            value={this.state.message.recipient_name}
+                            onChange={this.onHandleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="recipient">Recipient Phone Number (ex: +12223334444):</label>
+                        <input
+                            type="tel"
+                            name="recipient"
+                            id="recipient"
+                            value={this.state.message.recipient}
+                            onChange={this.onHandleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="sender_quantity">Quantity (USD):</label>
+                        <input
+                            type="text"
+                            name="sender_quantity"
+                            id="sender_quantity"
+                            value={this.state.message.sender_quantity}
+                            onChange={this.onHandleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="body">Message:</label>
+                        <textarea 
+                            name="body"
+                            id="body"
+                            value={this.state.message.body}
+                            onChange={this.onHandleChange}
+                        />
+                    </div>
+                    <button type="submit" disabled={this.state.submitting}>
+                        Send message
+                    </button>
+                </form>                     
+                <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
+            </div>
         );
     }
-
 }
 
 export default TRANSACTION_FORM;
