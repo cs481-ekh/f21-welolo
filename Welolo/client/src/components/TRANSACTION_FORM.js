@@ -14,6 +14,11 @@ class TRANSACTION_FORM extends Component {
                 sender_quantity: '',
                 body: ''
             },
+            errormessages: {
+                status : '',
+                code : '', 
+                moreInfo: ''
+            },
             submitting: false,
             error: false
         };
@@ -44,9 +49,14 @@ class TRANSACTION_FORM extends Component {
             //actually attempts sms
             var successfulSMS = await sendSMS(transactionData)
                 .then(res => res.json())
-                .then(data => { return data.success })
+                .then(data => { 
+                    const name = event.target.getAttribute('name');
+                    console.log(data)
+                    this.setState({
+                      errormessages: { ...data.errormessage, [name]: event.target.value }
+                    })
+                    return data.success })
                 .catch(err => {
-                    console.log(err)
                     return false
                 })
             if(successfulSMS) {
@@ -75,6 +85,14 @@ class TRANSACTION_FORM extends Component {
     }
 
     render(){ 
+        if(this.state.error === true){
+            return (<div><h1> We were unable to complete the transaction because of the following error: </h1>
+              <h3>Status: {this.state.errormessages.status}</h3>
+              <h3>Code: {this.state.errormessages.code}</h3>
+              <p>More Info:<a href={this.state.errormessages.moreInfo}>{this.state.errormessages.moreInfo}</a></p>
+            </div>)
+          }
+        
         return (
             <form onSubmit={this.onSubmit}>
                 <h1>Payment</h1>
