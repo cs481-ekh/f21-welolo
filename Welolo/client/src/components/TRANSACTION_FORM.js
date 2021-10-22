@@ -14,7 +14,6 @@ class TRANSACTION_FORM extends Component {
                 sender_quantity: '',
                 body: ''
             },
-            
             submitting: false,
             error: false,
             errors: {},
@@ -162,7 +161,7 @@ class TRANSACTION_FORM extends Component {
         }
     }
 
-    render(){ 
+    render(){
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -209,12 +208,11 @@ class TRANSACTION_FORM extends Component {
                     <button type="submit" disabled={this.state.submitting}>
                         Send message
                     </button>
-                </form>
+                </form>                     
                 <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
             </div>
         );
     }
-
 }
 
 export default TRANSACTION_FORM;
