@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+<<<<<<< HEAD
 import ErrorMessage from './error_message'
 import SuccessfulPayment from './pages/SuccessfulPayment';
 
+=======
+import SuccessfulPayment from './pages/SuccessfulPayment.js';
+import TRANSACTION_INIT from './components/TRANSACTION_INIT.js';
+>>>>>>> 206e1bf6da0dd7a975877ccee61194f573e598dd
 
 class PaymentForm extends React.Component {
   constructor(props) {
@@ -102,6 +107,7 @@ class PaymentForm extends React.Component {
   render() {
     return (
       <div>
+<<<<<<< HEAD
         <form  onSubmit={this.submitHandler.bind(this)}>
     
           <h1>Payment</h1>
@@ -123,6 +129,12 @@ class PaymentForm extends React.Component {
         <SuccessfulPayment />
       </form>
       </div>
+=======
+        <br/>
+        <TRANSACTION_INIT />
+      </div>
+
+>>>>>>> 206e1bf6da0dd7a975877ccee61194f573e598dd
     )}
 }
 
