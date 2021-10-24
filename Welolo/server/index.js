@@ -42,8 +42,8 @@ app.post("/api/dummy_endpoint"), (req,res) => {
   res.send(JSON.stringify({ success: false }));
 }
 // send a payment
-app.post("/api/send_payment", (req,res) => {
-  var amount = req.body.sender_quantity;
+app.post("/start-transaction", (req,res) => {
+  var amount = String(""+req.body.sender_quantity)
   var config = {
     transactionType: sdk.TransactionType.CreditAuth,
     method: "modal",
@@ -54,12 +54,11 @@ app.post("/api/send_payment", (req,res) => {
       },
       {
         id: "external_tran_id",
-        value: emergepay.externalTransactionID
+        value: emergepay.getExternalTransactionId()
       }
     ]
   }
-  console.log("This is as far as I can go! Step 2 will generate a transaction token to allow us to keep going here")
-  console.log(emergepay)
+  
   emergepay.startTransaction(config)
     .then(function (transactionToken) {
       res.send({
@@ -67,8 +66,8 @@ app.post("/api/send_payment", (req,res) => {
       })
     })
     .catch(function (err) {
-      console.log(err.message);
-      res.send(err.message);
+      console.log(err);
+      res.send(err);
     })
 });
 

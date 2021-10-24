@@ -17,7 +17,7 @@ load("https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-modal.js", (er
 //assets https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-modal.js
 
 
-function sendPayment(transactionData) {
+async function sendPayment(transactionData) {
     console.log(this)
     let success = false
     // Initialize emergepay modal (not required, but makes things load faster)
@@ -25,7 +25,7 @@ function sendPayment(transactionData) {
 
     // Set up event listener on Pay With Card button
     // Get a transactionToken serverside
-    getToken(transactionData)
+    await getToken(transactionData)
     .then(function(transactionToken) {
         // Set up and open the payment modal
         window.emergepay.open({
@@ -49,23 +49,24 @@ function sendPayment(transactionData) {
 };
 
 // This function makes a call to your server to get a transaction token
-function getToken(transactionData) {
-    return fetch("/api/send_payment", {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: transactionData
-    }).then((data)=>{
-            console.log(data)
-            if (data.transactionToken){
-                return (data.transactionToken);
-            }
-            else{
-                console.log('Error getting transaction token');
-            }
-        }).catch(err => {
-            return false
-        });
+async function getToken(transactionData) {
+    try {
+        const data = await fetch("/start-transaction", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: transactionData
+        })
+        if (data.transactionToken) {
+            return (data.transactionToken)
+        }
+        else {
+            console.log('Error getting transaction token')
+        }
+    }
+    catch (err) {
+        return false
+    }
 }
 export { sendPayment }
