@@ -15,6 +15,7 @@ then
     cd client
     npm install express
     npm install emergepay-sdk
+    npm install little-loader --save
     npm install --save react-script-tag
     exit 0
 else 
@@ -30,6 +31,7 @@ else
     cd client
     npm install express
     npm install emergepay-sdk
+    npm install little-loader --save
     npm install --save react-script-tag
     exit 0
 fi

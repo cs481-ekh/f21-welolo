@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 // SMS
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioAuthToken = 0;
 const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const twilio_client = require('twilio')(accountSid, twilioAuthToken);
 
@@ -22,7 +22,7 @@ const environmentUrl = process.env.GRAVITY_ENVIRONMENT_URL;
 const externalTransactionID = process.env.GRAVITY_EXTERNAL_TRANSACTION_ID;
 const emergepay = new sdk.emergepaySdk({
   oid: oid,
-  twilioAuthToken: gravityAuthToken,
+  authToken: gravityAuthToken,
   environmentUrl: environmentUrl,
   externalTransactionID:externalTransactionID
 });
@@ -59,6 +59,7 @@ app.post("/api/send_payment", (req,res) => {
     ]
   }
   console.log("This is as far as I can go! Step 2 will generate a transaction token to allow us to keep going here")
+  console.log(emergepay)
   emergepay.startTransaction(config)
     .then(function (transactionToken) {
       res.send({
