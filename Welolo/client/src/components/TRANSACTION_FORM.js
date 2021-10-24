@@ -115,18 +115,15 @@ class TRANSACTION_FORM extends Component {
         return errors;
       }    
 
+      
+
       async onSubmit(event) {
         event.preventDefault();
         this.setState({ submitting: true });
         var transactionData = JSON.stringify(this.state.message)
         // actually attempts payment
         var successfulPayment = await sendPayment(transactionData)
-            .then(res => res.json())
-            .then(data => { return data.success })
-            .catch(err => {
-                console.log(err)
-                return false
-            })
+        
         if(successfulPayment) {
             //actually attempts sms
             var successfulSMS = await sendSMS(transactionData)

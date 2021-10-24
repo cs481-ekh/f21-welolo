@@ -19,10 +19,12 @@ const sdk = require("emergepay-sdk");
 const oid = process.env.GRAVITY_OID;
 const gravityAuthToken = process.env.GRAVITY_AUTH_TOKEN;
 const environmentUrl = process.env.GRAVITY_ENVIRONMENT_URL;
+const externalTransactionID = process.env.GRAVITY_EXTERNAL_TRANSACTION_ID;
 const emergepay = new sdk.emergepaySdk({
   oid: oid,
   twilioAuthToken: gravityAuthToken,
-  environmentUrl: environmentUrl
+  environmentUrl: environmentUrl,
+  externalTransactionID:externalTransactionID
 });
 
 // DB
@@ -41,34 +43,32 @@ app.post("/api/dummy_endpoint"), (req,res) => {
 }
 // send a payment
 app.post("/api/send_payment", (req,res) => {
-  // var amount = "0.01"
-  // var config = {
-  //   transactionType: sdk.TransactionType.CreditAuth,
-  //   method: "modal",
-  //   fields: [
-  //     {
-  //       id: "base_amount",
-  //       value: amount
-  //     },
-  //     {
-  //       id: "external_tran_id",
-  //       value: emergepay.getExternalTransactionId()
-  //     }
-  //   ]
-  // }
-  // console.log("This is as far as I can go! Step 2 will generate a transaction token to allow us to keep going here")
-  // emergepay.startTransaction(config)
-  //   .then(function (transactionToken) {
-  //     res.send({
-  //       transactionToken: transactionToken
-  //     })
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err.message);
-  //     res.send(err.message);
-  //   })
-  res.header('Content-Type','application/json');
-  res.send(JSON.stringify({ success: true }));
+  var amount = req.body.sender_quantity;
+  var config = {
+    transactionType: sdk.TransactionType.CreditAuth,
+    method: "modal",
+    fields: [
+      {
+        id: "base_amount",
+        value: amount
+      },
+      {
+        id: "external_tran_id",
+        value: emergepay.externalTransactionID
+      }
+    ]
+  }
+  console.log("This is as far as I can go! Step 2 will generate a transaction token to allow us to keep going here")
+  emergepay.startTransaction(config)
+    .then(function (transactionToken) {
+      res.send({
+        transactionToken: transactionToken
+      })
+    })
+    .catch(function (err) {
+      console.log(err.message);
+      res.send(err.message);
+    })
 });
 
 // send message
