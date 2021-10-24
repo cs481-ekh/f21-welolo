@@ -1,4 +1,5 @@
 function sendPayment(transactionData) {
+    console.log(transactionData)
     return fetch("/api/send_payment", {
         method: 'POST',
         headers: {

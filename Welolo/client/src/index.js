@@ -1,13 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-import ErrorMessage from './error_message'
-import SuccessfulPayment from './pages/SuccessfulPayment';
-
-=======
 import SuccessfulPayment from './pages/SuccessfulPayment.js';
 import TRANSACTION_INIT from './components/TRANSACTION_INIT.js';
->>>>>>> 206e1bf6da0dd7a975877ccee61194f573e598dd
+import TRANSACTION_MOCK_MERCHANT from './components/TRANSACTION_MOCK_MERCHANT.js';
 
 class PaymentForm extends React.Component {
   constructor(props) {
@@ -107,34 +102,11 @@ class PaymentForm extends React.Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-        <form  onSubmit={this.submitHandler.bind(this)}>
-    
-          <h1>Payment</h1>
-          <p>Recipient Name:</p>
-          <input
-            type="text" data-cy="recipient_name" name="recipientname" value={this.state.fields["recipientname"]} onChange={this.handleChange.bind(this, "recipientname")} /> <br/>
-          <p>Recipient Ph#:</p>
-          <input
-            type="number" data-cy="recipient_ph" name="recipientph" value={this.state.fields["recipientph"]} onChange={this.handleChange.bind(this, "recipientph")} /> <br/>
-          <p>Quantity of funds:</p>
-          <input
-            type="number" data-cy="fund_quantity" name="fundquantity" value={this.state.fields["fundquantity"]}  onChange={this.handleChange.bind(this, "fundquantity")}  /> <br/>
-          <p>Message:</p>
-          <input
-            type="text" data-cy="message" name="message" value={this.state.fields["message"]} onChange={this.handleChange.bind(this, "message")} /> <br/>
-          <input
-          type='submit' value='Pay forward' data-cy="submit"/>
-        <ErrorMessage />
-        <SuccessfulPayment />
-      </form>
-      </div>
-=======
         <br/>
+        <TRANSACTION_MOCK_MERCHANT />
         <TRANSACTION_INIT />
       </div>
 
->>>>>>> 206e1bf6da0dd7a975877ccee61194f573e598dd
     )}
 }
 

@@ -1,0 +1,44 @@
+body{
+    text-align: center;
+}
+
+.ItemContainer{
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 1%;
+    display: flex;
+}
+
+.Cost{
+    margin-top: 1%;
+    font-size: 25px;
+    margin-right: 33%;
+    font-weight: bold;
+}
+
+.dotted{
+    border-top: dotted 1px;
+}
+
+.Item{
+    margin-top: 1%;
+    font-size: 25px;
+    margin-right: 33%;
+    font-weight: bold;
+}
+
+.ItemLabel{
+    font-size: 20px;
+    margin-right: 33%;
+    text-align: left;
+}
+
+.CostLabel{
+    font-size: 20px;
+    margin-right: 33%;
+}
+
+.SelectionButton{
+    background-color: lightblue;
+    
+}
