@@ -9,6 +9,7 @@ then
     npm start &
     cd client
     npm start &
+    sleep 10
 
     echo "Starting Tests"
     cd ..
