@@ -19,12 +19,10 @@ const sdk = require("emergepay-sdk");
 const oid = process.env.GRAVITY_OID;
 const gravityAuthToken = process.env.GRAVITY_AUTH_TOKEN;
 const environmentUrl = process.env.GRAVITY_ENVIRONMENT_URL;
-const externalTransactionID = process.env.GRAVITY_EXTERNAL_TRANSACTION_ID;
 const emergepay = new sdk.emergepaySdk({
   oid: oid,
   authToken: gravityAuthToken,
   environmentUrl: environmentUrl,
-  externalTransactionID:externalTransactionID
 });
 
 // DB
