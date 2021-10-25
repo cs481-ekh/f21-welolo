@@ -6,7 +6,12 @@ then
     npm install mysql express 
 
     echo "Starting Servers"
-    ./start_node_server.sh 
+    npm start &
+    cd client
+    npm start &
+    cd ..
+    cd ..
+    ./test.sh
     exit 0
 else 
     cd Welolo
