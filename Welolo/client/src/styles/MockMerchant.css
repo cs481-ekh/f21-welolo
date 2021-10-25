@@ -42,3 +42,9 @@ body{
     background-color: lightblue;
     
 }
+
+.SkipButton{
+    background-color: lightblue;
+    margin-top: 4%;
+    width: 10%;
+}

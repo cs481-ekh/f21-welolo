@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { sendSMS } from '../util/sendSMS.js';
 import { sendPayment } from './../util/sendPayment.js';
 
+var selectedCost = -1;
+
 class TRANSACTION_FORM extends Component {
     constructor(props) {
         super(props);
+        selectedCost = props.data;
         this.state = {
             message: {
                 recipient_name: '',
