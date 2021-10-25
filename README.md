@@ -44,3 +44,4 @@ The React.js components of the project are inside the client folder.
 
 ##  Resources Used
 - https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/
+- https://www.twilio.com/blog/send-an-sms-react-twilio

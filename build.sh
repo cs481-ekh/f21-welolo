@@ -9,6 +9,8 @@ then
     npm start &
     cd client
     npm start &
+
+    echo "Starting Tests"
     cd ..
     cd ..
     ./test.sh
