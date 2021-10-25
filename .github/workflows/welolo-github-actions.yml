@@ -10,5 +10,9 @@ jobs:
       - run: ./build.sh
       - run: echo "The build was a ${{ job.status }}."
       - run: echo "Running Tests"
-      - run: ./test.sh
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          build: npm run build
+          start: npm start
       - run: echo "Tests were a ${{ job.status }}."
