@@ -9,12 +9,6 @@ then
     npm start &
     cd client
     npm start &
-    sleep 10
-
-    echo "Starting Tests"
-    cd ..
-    cd ..
-    ./test.sh
     exit 0
 else 
     cd Welolo
