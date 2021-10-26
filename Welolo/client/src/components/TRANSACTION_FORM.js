@@ -113,9 +113,7 @@ class TRANSACTION_FORM extends Component {
     
         this.setState({ errors: errors });
         return errors;
-      }    
-
-      
+      }         
 
       async onSubmit(event) {
         event.preventDefault();
@@ -123,6 +121,11 @@ class TRANSACTION_FORM extends Component {
         var transactionData = JSON.stringify(this.state.message)
         // actually attempts payment
         var successfulPayment = await sendPayment(transactionData)
+        .then(() => {
+            return true })
+        .catch(err => {
+            return false
+        })
         
         if(successfulPayment) {
             //actually attempts sms

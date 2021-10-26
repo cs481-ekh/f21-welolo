@@ -16,7 +16,6 @@ then
     npm install express
     npm install emergepay-sdk
     npm install little-loader --save
-    npm install --save react-script-tag
     exit 0
 else 
     cd Welolo
@@ -32,7 +31,6 @@ else
     npm install express
     npm install emergepay-sdk
     npm install little-loader --save
-    npm install --save react-script-tag
     exit 0
 fi
 exit 127
