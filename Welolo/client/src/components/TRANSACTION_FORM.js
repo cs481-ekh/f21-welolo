@@ -125,6 +125,7 @@ class TRANSACTION_FORM extends Component {
             .then(data => { return data.success })
             .catch(err => {
                 console.log(err)
+                console.log("Failure");
                 return false
             })
         if(successfulPayment) {
