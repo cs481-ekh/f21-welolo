@@ -18,9 +18,6 @@ then
     exit 0
 else 
     cd Welolo
-    exit 0
-else 
-    cd Welolo
     npm install
     npm install dotenv --save
     npm install mysql
