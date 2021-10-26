@@ -21,6 +21,6 @@
     "twilio": "^3.70.0"
   },
   "devDependencies": {
-    "cypress": "^8.6.0"
+    "cypress": "^8.7.0"
   }
 }
