@@ -10,9 +10,4 @@ jobs:
       - run: ./build.sh
       - run: echo "The build was a ${{ job.status }}."
       - run: echo "Starting Servers"
-      - run: echo "Starting Node Server"
-      - run: cd ./Welolo/
-      - run: npm start &
-      - run: echo "Starting React Server"
-      - run: cd ./client/
-      - run: npm start &
+      - run: ./run.sh
