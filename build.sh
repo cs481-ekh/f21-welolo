@@ -1,8 +1,7 @@
 #!/bin/bash
-if [ -d "./Welolo/node_modules" ] || [ -d "./Welolo/client/node_modules" ];
+if [ -d "./Welolo/node_modules" ]
 then
     rm -rf ./Welolo/node_modules
-    rm -rf ./Welolo/client/node_modules
     cd Welolo
     npm install
     npm install dotenv --save
