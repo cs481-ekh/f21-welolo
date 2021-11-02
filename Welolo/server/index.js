@@ -15,6 +15,7 @@ const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const twilio_client = require('twilio')(accountSid, twilioAuthToken);
 
 // Gravity
+var externalTransactionId;
 const sdk = require("emergepay-sdk");
 const oid = process.env.GRAVITY_OID;
 const gravityAuthToken = process.env.GRAVITY_AUTH_TOKEN;
@@ -42,6 +43,7 @@ app.post("/api/dummy_endpoint"), (req,res) => {
 // send a payment
 app.post("/start-transaction", (req,res) => {
   var amount = String(""+req.body.sender_quantity)
+  externalTransactionId = emergepay.getExternalTransactionId()
   var config = {
     transactionType: sdk.TransactionType.CreditAuth,
     method: "modal",
@@ -52,7 +54,7 @@ app.post("/start-transaction", (req,res) => {
       },
       {
         id: "external_tran_id",
-        value: emergepay.getExternalTransactionId()
+        value: externalTransactionId
       }
     ]
   }
@@ -67,6 +69,11 @@ app.post("/start-transaction", (req,res) => {
       console.log(err);
       res.send(err);
     })
+});
+
+emergepay.acknowledge(externalTransactionId)
+    .catch(function(error) {
+        console.log("Acknowledgement failed, try again");
 });
 
 // send message
