@@ -205,7 +205,7 @@ class TRANSACTION_FORM extends Component {
                             onChange={this.onHandleChange}
                         />
                     </div>
-                    <button type="submit" disabled={this.state.submitting}>
+                    <button type="submit" htmlFor="submit" name="submit" id="submit" disabled={this.state.submitting}>
                         Send message
                     </button>
                 </form>                     
