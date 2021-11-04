@@ -71,6 +71,8 @@ app.post("/start-transaction", (req,res) => {
     })
 });
 
+//Make into its own endpoint and set the externalTransaction id to nothing once it goes through properly.
+//We will also need to check that it isn't nothing before we are able to use it.
 emergepay.acknowledge(externalTransactionId)
     .catch(function(error) {
         console.log("Acknowledgement failed, try again");
