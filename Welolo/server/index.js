@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 // SMS
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioAuthToken = 0;
 const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const twilio_client = require('twilio')(accountSid, twilioAuthToken);
 
@@ -21,54 +21,56 @@ const gravityAuthToken = process.env.GRAVITY_AUTH_TOKEN;
 const environmentUrl = process.env.GRAVITY_ENVIRONMENT_URL;
 const emergepay = new sdk.emergepaySdk({
   oid: oid,
-  twilioAuthToken: gravityAuthToken,
-  environmentUrl: environmentUrl
+  authToken: gravityAuthToken,
+  environmentUrl: environmentUrl,
 });
 
 // DB
 const mysql = require("mysql");
 const PORT = process.env.PORT || 3001;
 const db = mysql.createPool({
-  host: "localhost",
-  user: "WeloloApp",
-  password: "password",
-  database: "Welolo"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
+
+// DB Utils
+const merchantDataQuery = "SELECT mm.id,mm.item_name,mm.item_description,mm.item_cost,mm.qty_avail FROM merchantmenu AS mm INNER JOIN merchants AS m ON mm.merchant_id=m.id WHERE m.id=";
+const merchantIdQuery = "SELECT * FROM merchants";
 
 app.post("/api/dummy_endpoint"), (req,res) => {
   res.header('Content-type', 'application/json');
   res.send(JSON.stringify({ success: false }));
 }
 // send a payment
-app.post("/api/send_payment", (req,res) => {
-  // var amount = "0.01"
-  // var config = {
-  //   transactionType: sdk.TransactionType.CreditAuth,
-  //   method: "modal",
-  //   fields: [
-  //     {
-  //       id: "base_amount",
-  //       value: amount
-  //     },
-  //     {
-  //       id: "external_tran_id",
-  //       value: emergepay.getExternalTransactionId()
-  //     }
-  //   ]
-  // }
-  // console.log("This is as far as I can go! Step 2 will generate a transaction token to allow us to keep going here")
-  // emergepay.startTransaction(config)
-  //   .then(function (transactionToken) {
-  //     res.send({
-  //       transactionToken: transactionToken
-  //     })
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err.message);
-  //     res.send(err.message);
-  //   })
-  res.header('Content-Type','application/json');
-  res.send(JSON.stringify({ success: true }));
+app.post("/start-transaction", (req,res) => {
+  var amount = String(""+req.body.sender_quantity)
+  var config = {
+    transactionType: sdk.TransactionType.CreditAuth,
+    method: "modal",
+    fields: [
+      {
+        id: "base_amount",
+        value: amount
+      },
+      {
+        id: "external_tran_id",
+        value: emergepay.getExternalTransactionId()
+      }
+    ]
+  }
+  
+  emergepay.startTransaction(config)
+    .then(function (transactionToken) {
+      res.send({
+        transactionToken: transactionToken
+      })
+    })
+    .catch(function (err) {
+      console.log(err);
+      res.send(err);
+    })
 });
 
 // send message
@@ -94,6 +96,38 @@ app.get("/test_database", (req, res) => {
       res.json({message:"connection to the database was unsuccessful"});
     } else { 
       res.json({message:"successfully connected to the database"});
+    }
+  })
+})
+
+app.get("/api/merchant_data", (req,res) => {
+  res.header('Content-Type', 'application/json');
+  var merchantId = req.query.m_id;
+  if(merchantId) {
+    db.query(merchantDataQuery+merchantId, (err,results,fields) => {
+      if(err) {
+        console.log(err);
+        res.json({message:"Failed to query the database. See errors:\n"+err});
+      }
+      res.json(results);
+    });
+  } else {
+    res.json({error:"merchant ID is required"});
+  }
+});
+
+app.get("/api/merchants", (req,res) => {
+  db.query("SELECT * FROM merchants", (err, results, fields) => {
+    if(err) {
+      console.log(err);
+      res.json({error:"Could not complete the query. See error:\n"+err});
+    } else { 
+      db.query(merchantIdQuery, (err,results, fields) => {
+        if(err){
+          res.json({message:"Failed to query the database. See errors:\n"+err});
+        }
+        res.json(results);
+      });
     }
   })
 })

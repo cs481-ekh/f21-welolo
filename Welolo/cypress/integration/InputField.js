@@ -1,19 +1,22 @@
 class InputField{
 
-    reciepientName(){
-        return cy.get("[data-cy=recipient_name]")
+    recipientName(){
+        return cy.get("#recipient_name")
     }
-    reciepientPhone(){
-        return cy.get("[data-cy=recipient_ph]")
+    recipientPhone(){
+        return cy.get("#recipient")
     }
     fundQuantity(){
-        return cy.get("[data-cy=fund_quantity]")
+        return cy.get("#sender_quantity")
     }
     message(){
-        return cy.get("[data-cy=message]")
+        return cy.get("#body")
     }
     submit(){
-        return cy.get("[data-cy=submit]")
+        return cy.get("#submit")
+    }
+    paymentModal() {
+        return cy.get("#cip-hosted-payments-app", { timeout: 10000 })
     }
 }
 
