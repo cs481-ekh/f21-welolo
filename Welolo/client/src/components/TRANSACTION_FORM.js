@@ -114,7 +114,7 @@ class TRANSACTION_FORM extends Component {
     
         this.setState({ errors: errors });
         return errors;
-      }    
+      }         
 
       async onSubmit(event) {
         event.preventDefault();
@@ -122,12 +122,12 @@ class TRANSACTION_FORM extends Component {
         var transactionData = JSON.stringify(this.state.message)
         // actually attempts payment
         var successfulPayment = await sendPayment(transactionData)
-            .then(res => res.json())
-            .then(data => { return data.success })
-            .catch(err => {
-                console.log(err)
-                return false
-            })
+        .then(() => {
+            return true })
+        .catch(err => {
+            return false
+        })
+        
         if(successfulPayment) {
             //actually attempts sms
             var successfulSMS = await sendSMS(transactionData)
@@ -208,7 +208,7 @@ class TRANSACTION_FORM extends Component {
                             onChange={this.onHandleChange}
                         />
                     </div>
-                    <button type="submit" disabled={this.state.submitting}>
+                    <button type="submit" htmlFor="submit" name="submit" id="submit" disabled={this.state.submitting}>
                         Send message
                     </button>
                 </form>                     

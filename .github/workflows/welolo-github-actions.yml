@@ -9,7 +9,3 @@ jobs:
       - run: echo "Building project. Triggered by ${{ github.event_name }} "
       - run: ./build.sh
       - run: echo "The build was a ${{ job.status }}."
-
-      - run: echo "Running Tests"
-      - run: ./test.sh
-      - run: echo "Tests were a ${{ job.status }}."
