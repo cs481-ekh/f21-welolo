@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-
 import { sendSMS } from '../util/sendSMS.js';
-
 import { sendPayment } from './../util/sendPayment.js';
+
+var selectedCost = -1;
 
 class TRANSACTION_FORM extends Component {
     constructor(props) {
         super(props);
+        selectedCost = props.data;
         this.state = {
             message: {
                 recipient_name: '',
@@ -162,6 +163,8 @@ class TRANSACTION_FORM extends Component {
     }
 
     render(){
+      if(selectedCost === -1)
+      {
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
@@ -212,6 +215,61 @@ class TRANSACTION_FORM extends Component {
                 <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
             </div>
         );
+      }
+      else
+      {
+        return (
+          <div>
+              <form onSubmit={this.onSubmit}>
+                  <h1>Payment</h1>
+                  <div>
+                      <label htmlFor="recipient_name">Recipient Name:</label>
+                      <input 
+                          type="text"
+                          name="recipient_name"
+                          id="recipient_name"
+                          value={this.state.message.recipient_name}
+                          onChange={this.onHandleChange}
+                      />
+                  </div>
+                  <div>
+                      <label htmlFor="recipient">Recipient Phone Number (ex: +12223334444):</label>
+                      <input
+                          type="tel"
+                          name="recipient"
+                          id="recipient"
+                          value={this.state.message.recipient}
+                          onChange={this.onHandleChange}
+                      />
+                  </div>
+                  <div>
+                      <label htmlFor="sender_quantity">Quantity (USD):</label>
+                      <input
+                          type="text"
+                          name="sender_quantity"
+                          id="sender_quantity"
+                          value={selectedCost}
+                          onChange={this.onHandleChange}
+                          readOnly
+                      />
+                  </div>
+                  <div>
+                      <label htmlFor="body">Message:</label>
+                      <textarea 
+                          name="body"
+                          id="body"
+                          value={this.state.message.body}
+                          onChange={this.onHandleChange}
+                      />
+                  </div>
+                  <button type="submit" disabled={this.state.submitting}>
+                      Send message
+                  </button>
+              </form>                     
+              <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
+          </div>
+      );
+      }
     }
 }
 

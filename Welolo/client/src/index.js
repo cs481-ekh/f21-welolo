@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SuccessfulPayment from './pages/SuccessfulPayment.js';
-import TRANSACTION_INIT from './components/TRANSACTION_INIT.js';
+
+import TRANSACTION_MOCK_MERCHANT from './components/TRANSACTION_MOCK_MERCHANT.js';
 import { getMerchantData } from './util/getMerchantData.js';
 import { getMerchants } from './util/getMerchants.js';
 
@@ -10,14 +10,15 @@ getMerchantData(id);
 getMerchants();
 
 
-class PaymentForm extends React.Component {
+
+class InitWebApp extends React.Component {
   render() {
     return (
       <div>
         <br/>
-        <TRANSACTION_INIT />
+        <TRANSACTION_MOCK_MERCHANT />
       </div>
     )}
 }
 
-ReactDOM.render(<PaymentForm />, document.getElementById('root'));
+ReactDOM.render(<InitWebApp />, document.getElementById('root'));
