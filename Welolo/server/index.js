@@ -29,11 +29,15 @@ const emergepay = new sdk.emergepaySdk({
 const mysql = require("mysql");
 const PORT = process.env.PORT || 3001;
 const db = mysql.createPool({
-  host: "localhost",
-  user: "WeloloApp",
-  password: "password",
-  database: "Welolo"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
+
+// DB Utils
+const merchantDataQuery = "SELECT mm.id,mm.item_name,mm.item_description,mm.item_cost,mm.qty_avail FROM merchantmenu AS mm INNER JOIN merchants AS m ON mm.merchant_id=m.id WHERE m.id=";
+const merchantIdQuery = "SELECT * FROM merchants";
 
 app.post("/api/dummy_endpoint"), (req,res) => {
   res.header('Content-type', 'application/json');
@@ -92,6 +96,38 @@ app.get("/test_database", (req, res) => {
       res.json({message:"connection to the database was unsuccessful"});
     } else { 
       res.json({message:"successfully connected to the database"});
+    }
+  })
+})
+
+app.get("/api/merchant_data", (req,res) => {
+  res.header('Content-Type', 'application/json');
+  var merchantId = req.query.m_id;
+  if(merchantId) {
+    db.query(merchantDataQuery+merchantId, (err,results,fields) => {
+      if(err) {
+        console.log(err);
+        res.json({message:"Failed to query the database. See errors:\n"+err});
+      }
+      res.json(results);
+    });
+  } else {
+    res.json({error:"merchant ID is required"});
+  }
+});
+
+app.get("/api/merchants", (req,res) => {
+  db.query("SELECT * FROM merchants", (err, results, fields) => {
+    if(err) {
+      console.log(err);
+      res.json({error:"Could not complete the query. See error:\n"+err});
+    } else { 
+      db.query(merchantIdQuery, (err,results, fields) => {
+        if(err){
+          res.json({message:"Failed to query the database. See errors:\n"+err});
+        }
+        res.json(results);
+      });
     }
   })
 })
