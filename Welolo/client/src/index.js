@@ -1,23 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SuccessfulPayment from './pages/SuccessfulPayment.js';
-import TRANSACTION_INIT from './components/TRANSACTION_INIT.js';
-import { getMerchantData } from './util/getMerchantData.js';
-import { getMerchants } from './util/getMerchants.js';
+import { BrowserRouter } from 'react-router-dom'
 
-var id = 5;
-getMerchantData(id);
-getMerchants();
+import LAUNCH_APPLICATION from './components/LAUNCH_APPLICATION';
+import NAVBAR from './components/NAVBAR.js';
 
+import "./styles/main.css";
 
-class PaymentForm extends React.Component {
-  render() {
-    return (
-      <div>
-        <br/>
-        <TRANSACTION_INIT />
+ReactDOM.render(
+  (
+    <BrowserRouter>
+      <div id="container">
+        <NAVBAR />
+        <LAUNCH_APPLICATION />
       </div>
-    )}
-}
-
-ReactDOM.render(<PaymentForm />, document.getElementById('root'));
+    </BrowserRouter>
+  ), document.getElementById('root')
+);
