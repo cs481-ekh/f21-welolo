@@ -23,6 +23,22 @@ async function sendPayment(transactionData) {
             // (optional) Callback function that gets called after a successful transaction
             onTransactionSuccess: function(approvalData) {
                 console.log("Approval Data", approvalData);
+
+                var success = await sendAcknowledgement()
+                .then(data => {return true})
+                .catch(err => {
+                    data => {return false}
+                })
+
+                if(success)
+                {
+                    console.log("Success: Transaction Acknowledged!");
+                }
+                else
+                {
+                    console.log("Error: Unable to Acknowledge Transaction");
+                }
+
                 window.emergepay.close();
                 window.location = "https://www.chargeitpro.com";
             },
@@ -45,4 +61,17 @@ async function getToken(transactionData) {
     })
     return data;
 }
+
+
+// This function makes a call to endpoint to acknowledge transaction
+async function sendAcknowledgement() {
+    const data = await fetch("/acknowledge-transaction", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    return data;
+}
+
 export { sendPayment }
