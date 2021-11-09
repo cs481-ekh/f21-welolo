@@ -51,22 +51,22 @@ class TRANSACTION_MOCK_MERCHANT extends Component {
                         <div className="ItemContainer">
                             <label className="ItemLabel" htmlFor="item">Tacos</label>
                             <label className="CostLabel"htmlFor ="cost">{Items.get('Tacos')}</label>
-                            <button className="SelectionButton" onClick={this.onClick}>Select Tacos</button>
+                            <button className="SelectionButton" id="button1" onClick={this.onClick}>Select Tacos</button>
                         </div>
                         <hr className="dotted" />
                         <div className="ItemContainer">
                             <label className="ItemLabel" htmlFor="item">Coffee</label>
                             <label className="CostLabel" htmlFor="cost">{Items.get('Coffee')}</label>
-                            <button className="SelectionButton" onClick={this.onClick}>Select Coffee</button>
+                            <button className="SelectionButton" id="button2" onClick={this.onClick}>Select Coffee</button>
                         </div>
                         <hr className="dotted" />
                         <div className="ItemContainer">
                             <label className="ItemLabel" htmlFor="item">Pest Removal Service</label>
                             <label className="CostLabel" htmlFor="cost">{Items.get('Pest Removal Service')}</label>
-                            <button className="SelectionButton" onClick={this.onClick}>Select Pest Removal Service</button>
+                            <button className="SelectionButton" id="button3" onClick={this.onClick}>Select Pest Removal Service</button>
                         </div>
                         <hr className="dotted" />
-                        <button className="SkipButton" onClick={this.onClick}>Skip this Step</button>
+                        <button className="SkipButton" id="skipButton" onClick={this.onClick}>Skip this Step</button>
                     </form>                     
                 </div>
             );
