@@ -46,7 +46,7 @@ app.post("/api/dummy_endpoint"), (req,res) => {
 }
 // send a payment
 app.post("/start-transaction", (req,res) => {
-  var amount = String(""+req.body.sender_quantity)
+  var amount = String(req.body.sender_quantity)
   externalTransactionId = emergepay.getExternalTransactionId()
   var config = {
     transactionType: sdk.TransactionType.CreditAuth,

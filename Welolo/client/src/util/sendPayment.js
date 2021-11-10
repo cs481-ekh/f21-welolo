@@ -24,20 +24,7 @@ async function sendPayment(transactionData) {
             onTransactionSuccess: function(approvalData) {
                 console.log("Approval Data", approvalData);
 
-                var success = await sendAcknowledgement()
-                .then(data => {return true})
-                .catch(err => {
-                    data => {return false}
-                })
 
-                if(success)
-                {
-                    console.log("Success: Transaction Acknowledged!");
-                }
-                else
-                {
-                    console.log("Error: Unable to Acknowledge Transaction");
-                }
 
                 window.emergepay.close();
                 window.location = "https://www.chargeitpro.com";
