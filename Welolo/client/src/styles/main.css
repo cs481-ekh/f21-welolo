@@ -2,7 +2,10 @@ body {
     margin:0;
 }
 
-#container {
+#window_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row nowrap;
     width: 100%;
     min-height: 100vh;
     background-color: #FFFFFF;
@@ -10,7 +13,30 @@ body {
     z-index: -999;
 }
 
+#foo {
+    width:100vw;
+    height: 100vh;
+    background-color: blue;
+}
+
+#display_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column nowrap;
+    width: 600px;
+    min-height: 100vh;
+    background-color: red;
+}
+
+@media only screen and (max-width: 600px) {
+    #display_container {
+      width: 100%;
+    }
+}
+
 #nav_container {
+    background-color: #FFFFFF;
     position: fixed;
     width: 100%;
     max-height: 7vh;

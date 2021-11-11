@@ -4,7 +4,7 @@ import { sendSMS } from '../util/sendSMS.js';
 
 import { sendPayment } from './../util/sendPayment.js';
 
-class TRANSACTION_FORM extends Component {
+export class TRANSACTION_FORM extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -215,4 +215,4 @@ class TRANSACTION_FORM extends Component {
     }
 }
 
-export default TRANSACTION_FORM;
+// export default TRANSACTION_FORM;

@@ -2,23 +2,30 @@
 
 import React from "react";
 import "./styles/App.css";
-import SuccessfulPayment from "SuccessfulPayment";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { SHOW_MERCHANTS } from './components/SHOW_MERCHANTS';
+import { TRANSACTION_FORM } from './components/TRANSACTION_FORM';
+
+
+
+import NAVBAR from './components/NAVBAR.js';
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  //TODO: Replace with our own API calls
-  React.useEffect(() => {
-    fetch("/test")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-      console.log(data);
-  }, []);
-  
-  React.useEffect(() => {
-    fetch("/test_database")
-      .then((res) => res.json());
-  }, []);
+  return (
+    <BrowserRouter>
+      <NAVBAR />
+      <div id="window_container">
+        <div id="display_container">
+          <Routes>
+            <Route path="/" element={() => SHOW_MERCHANTS } />
+            <Route path="/pay_forward" element={() => TRANSACTION_FORM } />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

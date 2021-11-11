@@ -1,14 +1,11 @@
 function getMerchants() {
-    fetch("/api/merchants", {
-        method:"GET"
+    return fetch("/api/merchants", {
+        method:"GET",
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
     })
-        .then(res => res.json) 
-        .then(data => {
-            console.log(data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
 }
 
 export { getMerchants }

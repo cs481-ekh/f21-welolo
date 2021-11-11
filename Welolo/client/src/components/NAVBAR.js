@@ -5,14 +5,12 @@ import "../styles/main.css";
 
 const NAVBAR = () => {
     return (
-      <div id="container">
         <div id="nav_container">
-          <div id="nav_banner">
-              <img src={logo} alt="Welolo Logo" id="logo_element"/>
-          </div> 
-          <hr id="nav_separator"/>
+            <div id="nav_banner">
+                <img src={logo} alt="Welolo Logo" id="logo_element"/>
+            </div> 
+            <hr id="nav_separator"/>
         </div>
-      </div>
     )
 }
 
