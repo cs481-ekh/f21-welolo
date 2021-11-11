@@ -8,11 +8,15 @@ class TRANSACTION_FORM extends Component {
     constructor(props) {
         super(props);
         selectedCost = props.data;
+        if (selectedCost == -1)
+        {
+          selectedCost = '';
+        }
         this.state = {
             message: {
                 recipient_name: '',
                 recipient: '',
-                sender_quantity: '',
+                sender_quantity: selectedCost,
                 body: ''
             },
             submitting: false,
@@ -163,7 +167,7 @@ class TRANSACTION_FORM extends Component {
     }
 
     render(){
-      if(selectedCost === -1)
+      if(selectedCost == '')
       {
         return (
             <div>
@@ -248,7 +252,7 @@ class TRANSACTION_FORM extends Component {
                           type="text"
                           name="sender_quantity"
                           id="sender_quantity"
-                          value={selectedCost}
+                          value={this.state.message.sender_quantity}
                           onChange={this.onHandleChange}
                           readOnly
                       />
