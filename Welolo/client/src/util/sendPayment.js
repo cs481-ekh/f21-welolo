@@ -1,4 +1,3 @@
-
 import load from 'little-loader'
 load("https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-modal.js")
 
@@ -24,7 +23,16 @@ async function sendPayment(transactionData) {
             onTransactionSuccess: function(approvalData) {
                 console.log("Approval Data", approvalData);
 
+                var success = sendAcknowledgement()
 
+                if(success)
+                {
+                    console.log("Success: Transaction Acknowledged!");
+                }
+                else
+                {
+                    console.log("Error: Unable to Acknowledge Transaction");
+                }
 
                 window.emergepay.close();
                 window.location = "https://www.chargeitpro.com";
