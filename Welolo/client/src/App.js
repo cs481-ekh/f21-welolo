@@ -19,8 +19,8 @@ function App() {
       <div id="window_container">
         <div id="display_container">
           <Routes>
-            <Route path="/" element={() => SHOW_MERCHANTS } />
-            <Route path="/pay_forward" element={() => TRANSACTION_FORM } />
+            <Route path="/" element={ <SHOW_MERCHANTS />} />
+            <Route path="/pay_forward/:merchant_id" element={ <TRANSACTION_FORM /> } />
           </Routes>
         </div>
       </div>

@@ -6,21 +6,23 @@ import { sendPayment } from './../util/sendPayment.js';
 
 export class TRANSACTION_FORM extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            message: {
-                recipient_name: '',
-                recipient: '',
-                sender_quantity: '',
-                body: ''
-            },
-            submitting: false,
-            error: false,
-            errors: {},
-        };
-        this.onHandleChange = this.onHandleChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        this.handleValidation = this.handleValidation.bind(this);
+      super(props);
+
+      console.log(this.props.location);
+      this.state = {
+          message: {
+              recipient_name: '',
+              recipient: '',
+              sender_quantity: '',
+              body: ''
+          },
+          submitting: false,
+          error: false,
+          errors: {},
+      };
+      this.onHandleChange = this.onHandleChange.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
+      this.handleValidation = this.handleValidation.bind(this);
     }
 
     onHandleChange(event) {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import "../styles/main.css"
 import { getMerchants } from '../util/getMerchants';
 
@@ -15,21 +16,45 @@ export class SHOW_MERCHANTS extends Component {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                return(
-                    <div>
-                        I got the data
-                    </div>
-                )
+                this.setState({merchants: data});
             })
             .catch(err => {
                 console.log(err);
             })
     }
 
+    buildMerchants() { 
+        var merchants = this.state.merchants;
+        var merchant_cards = [];
+        Object.keys(merchants).forEach((key) => {
+            var merchant_id = merchants[key].id;
+            var img_url = "./media/merchants/"+merchant_id+"/main/"+merchant_id+".jpeg";
+            merchant_cards.push(
+                <div className="merchant_tile">
+                    <div className="merchant_tile_img_container">
+                        <img 
+                            className="merchant_tile_img_literal" 
+                            src={img_url} 
+                            alt="merchant_logo"
+                        ></img>
+                    </div>
+                    <div className="merchant_tile_name">
+                        <div className="merchant_tile_name_wrapper">{merchants[key].MerchantName}</div>
+                        <Link to = {{pathname: '/pay_forward/'+merchant_id}}>
+                            <div className="merchant_tile_select_merchant" onClick={this.handleSelect}>Select Merchant</div>
+                        </Link>
+                    </div>
+                </div>
+            )
+        });
+        return(merchant_cards);
+    }
+
     render () {
-        if(this.state.merchants.foo != null) {
+        if(this.state.merchants != null) {
             return (
                 <div id="merchant_wrapper">
+                    {this.buildMerchants()}
                 </div>
             )
         } else {
