@@ -23,6 +23,21 @@ export class SHOW_MERCHANTS extends Component {
             })
     }
 
+    handleSelect(merchant_id) { 
+        /**
+         * Need to return divs for each 
+         * menu item in the 
+         * merchant menu database such 
+         * that it can be rendered in a list
+         * and quantity can be modified,
+         * the current state is changed, 
+         * 
+         * also need to reference another function 
+         * that can handle a <Link> to 
+         * the payment page from the menu 
+         */
+    }
+
     buildMerchants() { 
         var merchants = this.state.merchants;
         var merchant_cards = [];
@@ -40,9 +55,7 @@ export class SHOW_MERCHANTS extends Component {
                     </div>
                     <div className="merchant_tile_name">
                         <div className="merchant_tile_name_wrapper">{merchants[key].MerchantName}</div>
-                        <Link to = {{pathname: '/pay_forward/'+merchant_id}}>
-                            <div className="merchant_tile_select_merchant" onClick={this.handleSelect}>Select Merchant</div>
-                        </Link>
+                        <div className="merchant_tile_select_merchant" onClick={this.handleSelect(merchant_id)}>Select Merchant</div>
                     </div>
                 </div>
             )
