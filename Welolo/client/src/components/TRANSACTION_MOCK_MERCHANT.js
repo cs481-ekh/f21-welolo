@@ -4,7 +4,7 @@ import TRANSACTION_FORM from './TRANSACTION_FORM.js';
 
 var Items = new Map();
 var selected = false;
-var data = -1;
+var data = "-1";
 
 class TRANSACTION_MOCK_MERCHANT extends Component {
     constructor(props) {
