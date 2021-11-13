@@ -23,8 +23,13 @@ async function sendPayment(transactionData) {
             onTransactionSuccess: function(approvalData) {
                 console.log("Approval Data", approvalData);
 
-                var success = sendAcknowledgement()
-
+                const success = async() => await fetch("/start-transaction", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                console.log(success)
                 if(success)
                 {
                     console.log("Success: Transaction Acknowledged!");

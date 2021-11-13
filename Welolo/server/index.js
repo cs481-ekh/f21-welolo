@@ -83,7 +83,7 @@ app.post("/acknowledge-transaction", (req,res) => {
   //We will also need to check that it isn't nothing before we are able to use it.
   if(externalTransactionId == null)
   {
-    console.log("Error: Unable to acknowledge a transaction without an external transaction id");
+    return false;
   }
   else
   {
@@ -93,7 +93,7 @@ app.post("/acknowledge-transaction", (req,res) => {
         console.log("Acknowledgement failed, try again");
     });
 
-    console.log("Transaction Acknowledgement Successful")
+    return true;
   }
 });
 
