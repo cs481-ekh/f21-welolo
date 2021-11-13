@@ -4,7 +4,9 @@ import { sendSMS } from '../util/sendSMS.js';
 
 import { sendPayment } from './../util/sendPayment.js';
 
-export class TRANSACTION_FORM extends Component {
+import { withRouter } from '../util/withRouter';
+
+class UD_TRANSACTION_FORM extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -165,7 +167,7 @@ export class TRANSACTION_FORM extends Component {
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
-                    <h1>Payment</h1>
+                  <div id="payment_wrapper">
                     <div>
                         <label htmlFor="recipient_name">Recipient Name:</label>
                         <input 
@@ -208,6 +210,7 @@ export class TRANSACTION_FORM extends Component {
                     <button type="submit" htmlFor="submit" name="submit" id="submit" disabled={this.state.submitting}>
                         Send message
                     </button>
+                  </div>
                 </form>                     
                 <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
             </div>
@@ -215,4 +218,6 @@ export class TRANSACTION_FORM extends Component {
     }
 }
 
-// export default TRANSACTION_FORM;
+const TRANSACTION_FORM = withRouter(UD_TRANSACTION_FORM);
+
+export { TRANSACTION_FORM };

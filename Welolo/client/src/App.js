@@ -22,7 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={ <SHOW_MERCHANTS />} />
             <Route path="/view_menu/:merchant_id" element={ <SHOW_MERCHANT_MENU />} />
-            <Route path="/pay_forward:item_id" element={ <TRANSACTION_FORM /> } />
+            <Route path="/pay_forward/:item_id" element={ <TRANSACTION_FORM /> } />
           </Routes>
         </div>
       </div>

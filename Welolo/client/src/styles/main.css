@@ -36,6 +36,10 @@ body {
     margin-top: calc(7vh + 2px);
 }
 
+#payment_wrapper {
+    margin-top: calc(7vh + 2px);
+}
+
 #nav_container {
     background-color: #FFFFFF;
     position: fixed;
