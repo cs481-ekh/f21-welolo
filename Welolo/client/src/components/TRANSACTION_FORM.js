@@ -7,8 +7,6 @@ import { sendPayment } from './../util/sendPayment.js';
 export class TRANSACTION_FORM extends Component {
     constructor(props) {
       super(props);
-
-      console.log(this.props.location);
       this.state = {
           message: {
               recipient_name: '',
