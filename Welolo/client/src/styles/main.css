@@ -1,6 +1,12 @@
+/*===============================GENERAL=====================================*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;800&display=swap');
 body {
     margin:0;
+}
+
+input, textarea {
+    font-family:inherit;
+    font-size: inherit;
 }
 
 #window_container {
@@ -22,9 +28,12 @@ body {
 }
 
 
-@media only screen and (max-width: 600px) {
-    #display_container {
+@media screen and (max-width: 600px) {
+    #window_container > #display_container {
       width: 100%;
+    }
+    div[id$="_wrapper"] > div[class$="_tile"] {
+        width: 100%;
     }
 }
 
@@ -36,9 +45,6 @@ body {
     margin-top: calc(7vh + 2px);
 }
 
-#payment_wrapper {
-    margin-top: calc(7vh + 2px);
-}
 
 #nav_container {
     background-color: #FFFFFF;
@@ -100,6 +106,8 @@ div[class$="_tile"] {
     box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.1);
     transition: 0.2s;
 }
+
+
 
 div[class$="_tile"]:hover {
     transform: scale(1.05, 1.05);
@@ -182,4 +190,112 @@ div[class$="_tile_name"] {
     border-radius: 106px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+/*===========================PAYMENT FORM=====================================*/
+#payment_wrapper {
+    font-family: 'Poppins', sans-serif;
+    margin-top: calc(7vh + 2px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+#payment_wrapper > form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label[id$="_label"] { 
+    font-size: 90%;
+    display: block;
+}
+
+.label_wrapper {
+    width: 50%;
+}
+
+/* RECIPIENT NAME */
+#payment_form_recipient_name_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#recipient_name {
+    width: 50%;
+    height: 50%;
+}
+
+/* RECIPIENT NUMBER */
+#payment_form_recipient_number_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#recipient {
+    width: 50%;
+    height: 50%;
+}
+
+/* SENDER QUANTITY */
+#payment_form_sender_quantity_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#sender_quantity {
+    width: 50%;
+    height: 50%;
+}
+
+/* SENDER MESSAGE */
+#payment_form_sender_message_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#body {
+    width: 50%;
+    height: 50%;
+}
+
+/* SUBMIT PAYMENT DETAILS */ 
+#payment_form_submit_transaction_wrapper {
+    width: 50%;
+    display: flex;
+    justify-content: end;
+}
+
+#submit {
+    background-color: #000000;
+    padding: 10px 20px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 106px;
+    margin: 4px 2px;
+    border-width: 0;
+    cursor: pointer;
+    font-family: inherit;
 }
