@@ -2,3 +2,4 @@
 *.env
 /Welolo/node_modules/*
 /Welolo/client/node_modules/*
+*.DS_Store

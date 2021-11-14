@@ -30,7 +30,7 @@ class ND_SHOW_MERCHANT_MENU extends Component {
         var item_cards = [];
         Object.keys(items).forEach((key) => {
             var item_id = items[key].id;
-            var img_url = "./media/default_image.jpeg"; // update when more pics taken
+            var img_url = items[key].item_image_url; // update when more pics taken
             item_cards.push (
                 <div className="item_tile">
                     <div className="item_tile_img_container">

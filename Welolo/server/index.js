@@ -36,7 +36,7 @@ const db = mysql.createPool({
 });
 
 // DB Utils
-const merchantDataQuery = "SELECT mm.id,mm.item_name,mm.item_description,mm.item_cost,mm.qty_avail FROM merchantmenu AS mm INNER JOIN merchants AS m ON mm.merchant_id=m.id WHERE m.id=";
+const merchantDataQuery = "SELECT mm.id,mm.item_name,mm.item_description,mm.item_cost,mm.qty_avail,mm.item_image_url FROM merchantmenu AS mm INNER JOIN merchants AS m ON mm.merchant_id=m.id WHERE m.id=";
 const merchantIdQuery = "SELECT * FROM merchants";
 
 app.post("/api/dummy_endpoint"), (req,res) => {
