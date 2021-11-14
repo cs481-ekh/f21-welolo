@@ -78,7 +78,7 @@ app.post("/start-transaction", (req,res) => {
 
 
 // Send acknowledgement about successful payment back to gravity
-app.post("/acknowledge-transaction", (req,res) => {
+app.get("/acknowledge-transaction", (req,res) => {
   //Make into its own endpoint and set the externalTransaction id to nothing once it goes through properly.
   //We will also need to check that it isn't nothing before we are able to use it.
   if(externalTransactionId == null)

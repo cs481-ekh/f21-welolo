@@ -13,7 +13,9 @@ async function sendPayment(transactionData) {
     .catch(err => {
         return false
     })
+
     if(successfulToken) {
+        console.log(successfulToken)
         // Set up and open the payment modal
         window.emergepay.open({
             
@@ -23,21 +25,12 @@ async function sendPayment(transactionData) {
             onTransactionSuccess: function(approvalData) {
                 console.log("Approval Data", approvalData);
 
-                const success = async() => await fetch("/start-transaction", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                console.log(success)
-                if(success)
-                {
-                    console.log("Success: Transaction Acknowledged!");
-                }
-                else
-                {
-                    console.log("Error: Unable to Acknowledge Transaction");
-                }
+                var Success  = async() => {
+                    fetch("/start-transaction")
+                      .then((res) => res.json());
+                };
+
+                alert(Success)
 
                 window.emergepay.close();
                 window.location = "https://www.chargeitpro.com";
