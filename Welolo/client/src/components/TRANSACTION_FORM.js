@@ -3,6 +3,7 @@ import { sendSMS } from '../util/sendSMS.js';
 import { sendPayment } from './../util/sendPayment.js';
 
 import { withRouter } from '../util/withRouter';
+import { Link } from 'react-router-dom';
 
 class UD_TRANSACTION_FORM extends Component {
     constructor(props) {
@@ -222,9 +223,16 @@ class UD_TRANSACTION_FORM extends Component {
             />
           </div>
           <div id="payment_form_submit_transaction_wrapper">
-            <button type="submit" htmlFor="submit" name="submit" id="submit" disabled={this.state.submitting}>
-              Pay it Forward
-            </button>
+            <Link
+              to='/credentials'
+              state={{
+                message: this.state.message
+              }}
+            >
+              <div id="submit" disabled={this.state.submitting}>
+                Pay it Forward
+              </div>
+            </Link>
           </div>
         </form>                     
         <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>

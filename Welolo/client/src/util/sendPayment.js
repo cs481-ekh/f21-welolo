@@ -1,5 +1,5 @@
 import load from 'little-loader'
-load("https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-modal.js")
+load("https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-fields.js")
 
 async function sendPayment(transactionData) {
     // Initialize emergepay modal (not required, but makes things load faster)
