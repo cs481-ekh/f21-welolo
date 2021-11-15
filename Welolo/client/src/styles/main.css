@@ -250,6 +250,15 @@ label[id$="_label"] {
     margin-bottom: 20px;
 }
 
+#recipient_number_label {
+    display: inline;
+}
+
+#recipient_number_label_example {
+    font-size: 80%;
+    color: #808080;
+}
+
 #recipient {
     width: 50%;
     height: 50%;

@@ -183,6 +183,7 @@ class UD_TRANSACTION_FORM extends Component {
           <div id="payment_form_recipient_number_wrapper">
             <div className="label_wrapper">
               <label id="recipient_number_label" htmlFor="recipient">Recipient Phone Number</label>
+              <span id="recipient_number_label_example">&nbsp;ex: +12223334444</span>
             </div>
             <input
               type="tel"
