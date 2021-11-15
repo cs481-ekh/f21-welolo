@@ -13,6 +13,7 @@ then
     npm install cypress --save -dev
     cd client
     npm install express
+    npm install react-router-dom
     npm install emergepay-sdk
     npm install little-loader --save
     exit 0

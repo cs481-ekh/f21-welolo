@@ -2,3 +2,7 @@
 *.env
 /Welolo/node_modules/*
 /Welolo/client/node_modules/*
+<<<<<<< HEAD
+=======
+*.DS_Store
+>>>>>>> task#70
