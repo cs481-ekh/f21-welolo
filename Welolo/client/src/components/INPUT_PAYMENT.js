@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { withRouter } from '../util/withRouter';
 
-const emergepayFormFields = require('https://assets.emergepay-sandbox.chargeitpro.com/cip-hosted-fields.js');
-
 class UD_INPUT_PAYMENT extends Component {
     constructor(props) {
         super(props);
@@ -11,6 +9,8 @@ class UD_INPUT_PAYMENT extends Component {
             successfulPayment: '',
             emergepayForm: null
         }
+        this.onSubmit = this.onSubmit.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
     componentDidUpdate() {
@@ -18,11 +18,10 @@ class UD_INPUT_PAYMENT extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.state);
         getTransactionToken(JSON.stringify(this.props.state))
             .then(res=>res.json())
             .then(data => {
-                this.setState({emergepayForm: emergepayFormFields.init({
+                this.setState({emergepayForm: window.emergepayFormFields.init({
                     // (required) Used to set up each field
                     transactionToken: data.transactionToken,
                     // (required) The type of transaction to run
@@ -34,7 +33,7 @@ class UD_INPUT_PAYMENT extends Component {
                             appendToSelector: "cardNumberContainer",
                             useField: true,
                             // optional, see styles section above for more information
-                            styles: { "background-color": "blue" }
+                            styles: { "float": "right" }
                         },
                         cardExpirationDate: {
                             appendToSelector: "expirationDateContainer",
@@ -83,23 +82,35 @@ class UD_INPUT_PAYMENT extends Component {
                     onTransactionFailure: function (failureData) {
                         console.log('failureData', failureData);
                     }
-                })});
+                })})
+                console.log(this.state);
             })
-        
     }
 
-    submitForm() {
-       
+    async onSubmit(event) {
+        event.preventDefault();
+        console.log(this);
+        this.state.emergepayForm.process();
+        console.log(this.state);
+        console.log("just finished submitting i think?");
     }
 
     render() {
             return (
                 <div id="payment_wrapper">
-                    <div id="cardNumberContainer"></div>
-                    <div id="expirationDateContainer"></div>
-                    <div id="securityCodeContainer"></div>
-                    <div id="amountContainer"></div>
-                    <button id="payBtn" onClick={this.submitForm()}>Pay</button>
+                    <form onSubmit={this.onSubmit}>
+                        <div id="cardNumberContainer"></div>
+                        <div id="expirationDateContainer"></div>
+                        <div id="securityCodeContainer"></div>
+                        <div id="amountContainer"></div>
+                        <button 
+                            id="payBtn"
+                            type="submit"
+                            onClick={this.submitForm}
+                        >
+                            Pay
+                        </button>
+                    </form>
                 </div>
             )
     }
