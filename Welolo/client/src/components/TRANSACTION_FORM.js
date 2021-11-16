@@ -4,10 +4,12 @@ import { sendPayment } from './../util/sendPayment.js';
 
 import { withRouter } from '../util/withRouter';
 
+var selectedCost = ''
+
 class UD_TRANSACTION_FORM extends Component {
     constructor(props) {
       super(props);
-      var selectedCost = this.props.params.item_id; // need to pull value from withRouter
+      selectedCost = this.props.params.item_id; // need to pull value from withRouter
       selectedCost = selectedCost == 0 ? '' : selectedCost;
       this.state = {
           message: {
@@ -164,72 +166,134 @@ class UD_TRANSACTION_FORM extends Component {
     }
 
   render(){
-    var readOnly;
-    if(this.state.message.sender_quantity === ''){
-      readOnly=false;
+    if(selectedCost === '')
+    {
+      return (
+        <div id="payment_wrapper">
+          <h3></h3>
+          <form onSubmit={this.onSubmit}>
+            <div id="payment_form_recipient_name_wrapper">
+              <div className="label_wrapper">
+                <label id="recipient_name_label" htmlFor="recipient_name">Recipient Full Name</label>
+              </div>
+              <input 
+                type="text"
+                name="recipient_name"
+                id="recipient_name"
+                value={this.state.message.recipient_name}
+                onChange={this.onHandleChange}
+              />
+            </div>
+            <div id="payment_form_recipient_number_wrapper">
+              <div className="label_wrapper">
+                <label id="recipient_number_label" htmlFor="recipient">Recipient Phone Number</label>
+                <span id="recipient_number_label_example">&nbsp;ex: +12223334444</span>
+              </div>
+              <input
+                type="tel"
+                name="recipient"
+                id="recipient"
+                value={this.state.message.recipient}
+                onChange={this.onHandleChange}
+              />
+            </div>
+            <div id="payment_form_sender_quantity_wrapper">
+              <div className="label_wrapper">
+                <label id="sender_quantity_label" htmlFor="sender_quantity">Quantity (USD)</label>
+              </div>
+              <input
+                type="text"
+                name="sender_quantity"
+                id="sender_quantity"
+                value={this.state.message.sender_quantity}
+                onChange={this.onHandleChange}
+              />
+            </div>
+            <div id="payment_form_sender_message_wrapper">
+              <div className="label_wrapper">
+                <label id="sender_message_label" htmlFor="body">What would you like to say?</label>
+              </div>
+              <textarea 
+                name="body"
+                id="body"
+                value={this.state.message.body}
+                onChange={this.onHandleChange}
+              />
+            </div>
+            <div id="payment_form_submit_transaction_wrapper">
+              <button type="submit" htmlFor="submit" name="submit" id="submit" disabled={this.state.submitting}>
+                Pay it Forward
+              </button>
+            </div>
+          </form>                     
+          <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
+        </div>
+      );
     }
-    return (
-      <div id="payment_wrapper">
-        <h3></h3>
-        <form onSubmit={this.onSubmit}>
-          <div id="payment_form_recipient_name_wrapper">
-            <div className="label_wrapper">
-              <label id="recipient_name_label" htmlFor="recipient_name">Recipient Full Name</label>
+    else{
+      return (
+        <div id="payment_wrapper">
+          <h3></h3>
+          <form onSubmit={this.onSubmit}>
+            <div id="payment_form_recipient_name_wrapper">
+              <div className="label_wrapper">
+                <label id="recipient_name_label" htmlFor="recipient_name">Recipient Full Name</label>
+              </div>
+              <input 
+                type="text"
+                name="recipient_name"
+                id="recipient_name"
+                value={this.state.message.recipient_name}
+                onChange={this.onHandleChange}
+              />
             </div>
-            <input 
-              type="text"
-              name="recipient_name"
-              id="recipient_name"
-              value={this.state.message.recipient_name}
-              onChange={this.onHandleChange}
-            />
-          </div>
-          <div id="payment_form_recipient_number_wrapper">
-            <div className="label_wrapper">
-              <label id="recipient_number_label" htmlFor="recipient">Recipient Phone Number</label>
-              <span id="recipient_number_label_example">&nbsp;ex: +12223334444</span>
+            <div id="payment_form_recipient_number_wrapper">
+              <div className="label_wrapper">
+                <label id="recipient_number_label" htmlFor="recipient">Recipient Phone Number</label>
+                <span id="recipient_number_label_example">&nbsp;ex: +12223334444</span>
+              </div>
+              <input
+                type="tel"
+                name="recipient"
+                id="recipient"
+                value={this.state.message.recipient}
+                onChange={this.onHandleChange}
+              />
             </div>
-            <input
-              type="tel"
-              name="recipient"
-              id="recipient"
-              value={this.state.message.recipient}
-              onChange={this.onHandleChange}
-            />
-          </div>
-          <div id="payment_form_sender_quantity_wrapper">
-            <div className="label_wrapper">
-              <label id="sender_quantity_label" htmlFor="sender_quantity">Quantity (USD)</label>
+            <div id="payment_form_sender_quantity_wrapper">
+              <div className="label_wrapper">
+                <label id="sender_quantity_label" htmlFor="sender_quantity">Quantity (USD)</label>
+              </div>
+              <input
+                type="text"
+                name="sender_quantity"
+                id="sender_quantity"
+                value={this.state.message.sender_quantity}
+                onChange={this.onHandleChange}
+                readOnly
+              />
             </div>
-            <input
-              type="text"
-              name="sender_quantity"
-              id="sender_quantity"
-              value={this.state.message.sender_quantity}
-              onChange={this.onHandleChange}
-              readOnly={readOnly}
-            />
-          </div>
-          <div id="payment_form_sender_message_wrapper">
-            <div className="label_wrapper">
-              <label id="sender_message_label" htmlFor="body">What would you like to say?</label>
+            <div id="payment_form_sender_message_wrapper">
+              <div className="label_wrapper">
+                <label id="sender_message_label" htmlFor="body">What would you like to say?</label>
+              </div>
+              <textarea 
+                name="body"
+                id="body"
+                value={this.state.message.body}
+                onChange={this.onHandleChange}
+              />
             </div>
-            <textarea 
-              name="body"
-              id="body"
-              value={this.state.message.body}
-              onChange={this.onHandleChange}
-            />
-          </div>
-          <div id="payment_form_submit_transaction_wrapper">
-            <button type="submit" htmlFor="submit" name="submit" id="submit" disabled={this.state.submitting}>
-              Pay it Forward
-            </button>
-          </div>
-        </form>                     
-        <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
-      </div>
-    );
+            <div id="payment_form_submit_transaction_wrapper">
+              <button type="submit" htmlFor="submit" name="submit" id="submit" disabled={this.state.submitting}>
+                Pay it Forward
+              </button>
+            </div>
+          </form>                     
+          <div>{this.state.error ? <p>Please try again! phone number you entered was not a valid phone number</p> : <p></p>}</div>
+        </div>
+      );
+    }
   }
 }
 
