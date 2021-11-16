@@ -44,7 +44,7 @@ export class SHOW_MERCHANTS extends Component {
                             to = {{pathname: '/view_menu/'+merchant_id}}
                             style = {{ textDecoration: 'none' }}
                         >
-                            <div className="merchant_tile_select_merchant">Select Merchant</div>
+                            <div className="merchant_tile_select_merchant" id={"merchant_tile_select_merchant" + merchant_id}>Select Merchant</div>
                         </Link>
                     </div>
                 </div>

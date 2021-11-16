@@ -49,7 +49,7 @@ class ND_SHOW_MERCHANT_MENU extends Component {
                             to = {{ pathname: '/pay_forward/'+item_id }}
                             style = {{ textDecoration: 'none' }}
                         >
-                            <div className="item_tile_select_item">Select Item</div>
+                            <div className="item_tile_select_item" id={"item_tile_select_item" + item_id}>Select Item</div>
                         </Link>
                     </div>
                 </div>
