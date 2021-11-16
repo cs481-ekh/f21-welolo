@@ -1,6 +1,7 @@
 CREATE TABLE `Merchants` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `MerchantName` VARCHAR(45) CHARACTER SET 'utf8mb4' NOT NULL,
+  `merchant_main_image_url` VARCHAR(45) CHARACTER SET 'utf8mb4' NOT NULL,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `MerchantMenu` (

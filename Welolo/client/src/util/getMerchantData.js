@@ -11,16 +11,9 @@ function getMerchantData(merchantId) {
      * NEED TO STAY TO KEEP PROPERLY
      * REQUEST DATA
      */
-    fetch("/api/merchant_data?m_id="+merchantId, {
+    return fetch("/api/merchant_data?m_id="+merchantId, {
         method: 'GET'
-    })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+    });
 }
 
 export { getMerchantData }

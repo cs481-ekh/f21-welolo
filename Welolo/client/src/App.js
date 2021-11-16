@@ -1,29 +1,33 @@
 // client/src/App.js
 
 import React from "react";
-<<<<<<< HEAD
-import "./App.css";
-import "./SuccessfulPayment.js";
-=======
 import "./styles/App.css";
-import SuccessfulPayment from "SuccessfulPayment";
->>>>>>> 206e1bf6da0dd7a975877ccee61194f573e598dd
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { SHOW_MERCHANTS } from './components/SHOW_MERCHANTS';
+import { SHOW_MERCHANT_MENU } from './components/SHOW_MERCHANT_MENU';
+import { TRANSACTION_FORM } from './components/TRANSACTION_FORM';
+
+
+
+import NAVBAR from './components/NAVBAR.js';
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  //TODO: Replace with our own API calls
-  React.useEffect(() => {
-    fetch("/test")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-      console.log(data);
-  }, []);
-  
-  React.useEffect(() => {
-    fetch("/test_database")
-      .then((res) => res.json());
-  }, []);
+  return (
+    <BrowserRouter>
+      <NAVBAR />
+      <div id="window_container">
+        <div id="display_container">
+          <Routes>
+            <Route path="/" element={ <SHOW_MERCHANTS />} />
+            <Route path="/view_menu/:merchant_id" element={ <SHOW_MERCHANT_MENU />} />
+            <Route path="/pay_forward/:item_id" element={ <TRANSACTION_FORM /> } />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;

@@ -1,21 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TRANSACTION_MOCK_MERCHANT from './components/TRANSACTION_MOCK_MERCHANT.js';
-import { getMerchantData } from './util/getMerchantData.js';
-import { getMerchants } from './util/getMerchants.js';
 
-var id = 5;
-getMerchantData(id);
-getMerchants();
+import App from './App.js';
 
-class InitWebApp extends React.Component {
-  render() {
-    return (
-      <div>
-        <br/>
-        <TRANSACTION_MOCK_MERCHANT />
-      </div>
-    )}
-}
+import "./styles/main.css";
 
-ReactDOM.render(<InitWebApp />, document.getElementById('root'));
+ReactDOM.render(
+  (
+    <App />
+  ), document.getElementById('root')
+);

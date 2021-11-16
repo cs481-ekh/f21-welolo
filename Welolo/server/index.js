@@ -15,6 +15,7 @@ const weloloPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
 const twilio_client = require('twilio')(accountSid, twilioAuthToken);
 
 // Gravity
+var externalTransactionId = null;
 const sdk = require("emergepay-sdk");
 const oid = process.env.GRAVITY_OID;
 const gravityAuthToken = process.env.GRAVITY_AUTH_TOKEN;
@@ -36,7 +37,7 @@ const db = mysql.createPool({
 });
 
 // DB Utils
-const merchantDataQuery = "SELECT mm.id,mm.item_name,mm.item_description,mm.item_cost,mm.qty_avail FROM merchantmenu AS mm INNER JOIN merchants AS m ON mm.merchant_id=m.id WHERE m.id=";
+const merchantDataQuery = "SELECT mm.id,mm.item_name,mm.item_description,mm.item_cost,mm.qty_avail,mm.item_image_url FROM merchantmenu AS mm INNER JOIN merchants AS m ON mm.merchant_id=m.id WHERE m.id=";
 const merchantIdQuery = "SELECT * FROM merchants";
 
 app.post("/api/dummy_endpoint"), (req,res) => {
@@ -45,7 +46,8 @@ app.post("/api/dummy_endpoint"), (req,res) => {
 }
 // send a payment
 app.post("/start-transaction", (req,res) => {
-  var amount = String(""+req.body.sender_quantity)
+  var amount = String(req.body.sender_quantity)
+  externalTransactionId = emergepay.getExternalTransactionId()
   var config = {
     transactionType: sdk.TransactionType.CreditAuth,
     method: "modal",
@@ -56,7 +58,7 @@ app.post("/start-transaction", (req,res) => {
       },
       {
         id: "external_tran_id",
-        value: emergepay.getExternalTransactionId()
+        value: externalTransactionId
       }
     ]
   }
@@ -72,6 +74,29 @@ app.post("/start-transaction", (req,res) => {
       res.send(err);
     })
 });
+
+
+
+// Send acknowledgement about successful payment back to gravity
+app.get("/acknowledge-transaction", (req,res) => {
+  //Make into its own endpoint and set the externalTransaction id to nothing once it goes through properly.
+  //We will also need to check that it isn't nothing before we are able to use it.
+  if(externalTransactionId == null)
+  {
+    return false;
+  }
+  else
+  {
+    console.log("Acknowledging Transaction!")
+    emergepay.acknowledge(externalTransactionId)
+        .catch(function(error) {
+        console.log("Acknowledgement failed, try again");
+    });
+
+    return true;
+  }
+});
+
 
 // send message
 app.post("/api/send_message", (req,res) => {
