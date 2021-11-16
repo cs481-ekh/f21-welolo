@@ -57,6 +57,7 @@ input, textarea {
     display:flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
     height: 7vh;
     z-index: 990;
@@ -66,8 +67,11 @@ input, textarea {
     display:flex;
     object-fit: contain;
     background-color: #FFFFFF;
+    color: #F32950;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900;
+    font-size: 200%;
     max-height: 3vh;
-    padding-top: 3vh;
     z-index: 991;
 }
 

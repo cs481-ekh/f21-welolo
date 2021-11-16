@@ -7,7 +7,7 @@ const NAVBAR = () => {
     return (
         <div id="nav_container">
             <div id="nav_banner">
-                <img src={logo} alt="Welolo Logo" id="logo_element"/>
+               <div id="logo_element">WELOLO</div>
             </div> 
             <hr id="nav_separator"/>
         </div>
