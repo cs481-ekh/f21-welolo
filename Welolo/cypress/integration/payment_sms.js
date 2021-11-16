@@ -3,7 +3,7 @@ const inputFields = new InputFields();
 
 describe("Testing Successful Payment + Successful SMS", () => {
     beforeEach(()=>{
-        cy.visit('http://localhost:3000')
+        cy.visit('http://localhost:3000/pay_forward/5')
     })
 
     it('Visits the site & verifies elements', () => {
@@ -17,12 +17,11 @@ describe("Testing Successful Payment + Successful SMS", () => {
     it('Inputs valid information into the text box and verifies integrity', () => {
         inputFields.recipientName().type('John')
         inputFields.recipientPhone().type('+15005550000')
-        inputFields.fundQuantity().type('100.00')
-        inputFields.message().type('We have paid $100')
+        inputFields.message().type('We have paid $5')
         inputFields.recipientName().invoke('val').should('eq', 'John')
         inputFields.recipientPhone().invoke('val').should('eq', '+15005550000')
-        inputFields.fundQuantity().invoke('val').should('eq', '100.00')
-        inputFields.message().invoke('val').should('eq', 'We have paid $100')
+        inputFields.fundQuantity().invoke('val').should('eq', '5')
+        inputFields.message().invoke('val').should('eq', 'We have paid $5')
     })
     
     it('Verifies successful response after submission', () => {
