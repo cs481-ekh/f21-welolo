@@ -13,11 +13,7 @@
     "little-loader": "^0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-    "react-router-dom": "^6.0.2",
-=======
     "react-router-dom": "^6.0.0",
->>>>>>> e8e3b11b4d334ba828afd9b1e7a1ea7b798918d3
     "react-script-tag": "^1.1.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
