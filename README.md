@@ -1,4 +1,4 @@
-# Welolo - PayPal and Twillio Functionality
+# Welolo - Gravity and Twillio Functionality
 ![example workflow](https://github.com/cs481-ekh/f21-welolo/actions/workflows/welolo-github-actions.yml/badge.svg)
 
 ## Running the Node Server
