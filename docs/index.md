@@ -16,7 +16,7 @@ Welolo is a platform for local businesses that allows their customers to pay it 
 
 ### Screenshots
 
-![Welolo Merchant Page](blob/main/docs/WeloloMerchantPage.png)
+![Welolo Merchant Page](docs/WeloloMerchantPage.png)
 
 ![Welolo Item Page](https://drive.google.com/file/d/1DjgdovAr3wmlJfKZIN7jgaI66NcSPgkU/view?usp=sharing)
 
