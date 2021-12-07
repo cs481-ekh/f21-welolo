@@ -1,90 +1,12 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@AlyssaRWest 
-cs481-ekh
-/
-f21-welolo
-Public
-0
-10
-Code
-Issues
-15
-Pull requests
-Discussions
-Actions
-Projects
-1
-Wiki
-Security
-3
-Insights
-Settings
-We found potential security vulnerabilities in your dependencies.
-You can see this message because you have been granted access to Dependabot alerts for this repository.
+# Welolo - Pay It Forward
+Welolo is a platform for local businesses that allows their customers to pay it forward. It allows for gifting products and services to friends, family, and strangers to draw new customers and increase business. In its current state, a user is able to pay with a credit or debit card using Square to pay it forward. However, in the interest of ease of use for the user, Welolo is looking to expand their payment options and implement a system to notify those who have been gifted money.
 
-f21-welolo/index.html
-@ZahraRahmani2
-ZahraRahmani2 Update index.html
-Latest commit 7c3e72b 2 days ago
- History
- 1 contributor
-69 lines (52 sloc)  3.6 KB
-   
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8">
+Welolo currently has no way to notify the recipients of the items paid forward to them and have no other options for payment that may be more convenient to the user. For this project, we will create a checkout process in a sandboxed environment that can send details of the items, including the location, as a notification to the recipients, so the Welolo app helps the recipients to understand what items have been prepaid for them to get them from the store. We will also provide another payment option to help make things more convenient for users who would like to pay it forward to another individual or group.
 
-<!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Welolo | f21-welolo</title>
-<meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="Welolo" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Welolo: A web application for paying it forward to a gift recipient along with a text message" />
-<meta property="og:description" content="Welolo: A web application for paying it forward to a gift recipient along with a text message. " />
-<link rel="canonical" href="https://github.com/cs481-ekh/f21-welolo/" />
-<meta property="og:url" content="https://github.com/cs481-ekh/f21-welolo/" />
-<meta property="og:site_name" content="f21-welolo" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Welolo" />
-<script type="application/ld+json">
-{"description":"Welolo: A web application for paying it forward to a gift recipient along with a text message","url":"https://github.com/cs481-ekh/f21-welolo/","@type":"WebSite","headline":"Welolo","name":"f21-welolo","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <link rel="stylesheet" href="/f21-welolo/assets/css/style.css?v=968fdbd62134251765aefff7f8579f2f93e04642">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">f21-welolo</h1>
-      <h2 class="project-tagline">Welolo: A web application for paying it forward to a gift recipient along with a text message</h2>
-      
-        <a href="https://github.com/cs481-ekh/f21-welolo" class="btn">View on GitHub</a>
-      
-      
-    </section>
-
-    <section class="main-content">
-      <h1 id="welolo">Welolo</h1>
-
-<h2 id="abstract">Abstract:</h2>
-<p>Welolo is a platform for local businesses that allows their customers to pay it forward. It allows for gifting products and services to friends, family, and strangers to draw new customers and increase business. In its current state, a user is able to pay with a credit or debit card using Square to pay it forward. However, in the interest of ease of use for the user, Welolo is looking to expand their payment options and implement a system to notify those who have been gifted money.</p>
-
-<p>Welolo currently has no way to notify the recipients of the items paid forward to them and have no other options for payment that may be more convenient to the user. For this project, we will create a checkout process in a sandboxed environment that can send details of the items, including the location, as a notification to the recipients, so the Welolo app helps the recipients to understand what items have been prepaid for them to get them from the store. We will also provide another payment option to help make things more convenient for users who would like to pay it forward to another individual or group.</p>
-
-<h2 id="members">Members:</h2>
-<ul>
-  <li>Alyssa West</li>
-  <li>Xavier Frehner</li>
-  <li>Zahra Rahmani</li>
-</ul>
+## Team Members
+- Alyssa West
+- Xavier Frehner
+- Zahra Rahmani
 
 <h2 id="what-we-actually-built">Description:</h2>
 <p></p>
@@ -101,20 +23,3 @@ Latest commit 7c3e72b 2 days ago
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
       </footer>
     </section>
-
-    
-  </body>
-</html>
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading page
